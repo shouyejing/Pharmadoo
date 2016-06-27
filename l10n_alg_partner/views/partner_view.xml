@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="l10n_alg_res_partner_view" model="ir.ui.view">
+            <field name="name">l10n.alg.res.partner.view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='website']" position="after">
+                    <field name="rc_number"/>
+                    <field name="nif_number"/>
+                    <field name="ai_number"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

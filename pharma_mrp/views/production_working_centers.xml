@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="report_production_working_centers">
+             <t t-call="report.html_container">
+                 <t t-foreach="docs" t-as="o">
+                     <div class="page"
+                          t-foreach="o.workcenter_lines" t-as="center">
+                         <img t-att-src="'data:image/png;base64,%s' % o.company_id.logo" style="width:250px;height:50px"/>
+                         <div>
+                             <div class="row">
+                                 <div class="col-xs-9">
+                                     <h1 class="text-center">[
+                                         <span t-field="center.workcenter_id.code"/>] <span t-field="center.workcenter_id.name"/>
+                                     </h1>
+                                 </div>
+                                 <div class="col-xs-3 text-center">
+                                     <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', center.workcenter_id.code, 600, 100)" style="width:300px;height:100px"/>
+                                 </div>
+                             </div>
+
+                             <div class="row">
+                                 <h2><strong>Manufacturing Order: </strong><span t-field="o.name"/></h2>
+                                 <h2><strong>Produced Product: </strong>[<span t-field="o.product_id.default_code"/>] <span t-field="o.product_id.name"/></h2>
+                                 <h2><strong>Produced LOT: </strong><span t-field="o.mrp_lot_id.name"/></h2>
+                                 <h2><strong>Manufacturing Date: </strong></h2>
+                             </div>
+                         </div>
+                     </div>
+                 </t>
+             </t>
+        </template>
+
+    </data>
+</openerp>

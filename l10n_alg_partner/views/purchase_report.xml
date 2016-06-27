@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <report 
+            string="Pharma Purchase Order"
+            id="action_report_report_l10n_alg_partner_purchase_order"
+            model="purchase.order" 
+            report_type="qweb-pdf"
+            name="l10n_alg_partner.report_l10n_alg_partner_purchaseorder"
+            file="l10n_alg_partner.report_l10n_alg_partner_purchaseorder"
+            attachment_use = "True"
+            attachment="(object.partner_id.name or '')+ ' '+ (object.name or  '') + '.pdf'"
+        />
+
+        <!--<report -->
+            <!--string="Request for Quotation" -->
+            <!--id="report_purchase_quotation" -->
+            <!--model="purchase.order" -->
+            <!--report_type="qweb-pdf"-->
+            <!--name="purchase.report_purchasequotation" -->
+            <!--file="purchase.report_purchasequotation"-->
+        <!--/>-->
+    </data>
+</openerp>

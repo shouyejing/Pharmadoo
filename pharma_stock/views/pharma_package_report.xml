@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="report_package">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lot_sizes" t-value="get_product_packs(o)"/>
+                    <t t-set="pages" t-value="len(o.pack_operation_ids)"/>
+                    <div class="page" t-foreach="o.pack_operation_ids" t-as="pack_operation" style="font-size:11px">
+                        <div class="text-center">
+                            <span>
+                                <img t-att-src="'data:image/png;base64,%s' % o.company_id.logo" style="width:180px;height:26px"/>
+                            </span>
+                        </div>
+                        <p style="margin:0px;"><b>Internal Information</b></p>
+                        <table class="table table-bordered" t-if="o.pack_operation_ids" style="margin:0px;">
+                               <tbody>
+                                   <tr>
+                                       <td style="padding:1px;"> Ticket Number:</td>
+                                       <td style="padding:1px; font-size:14px">
+                                            <b>
+                                                <span t-field="pack_operation.pack_index"/>
+                                                /<span><t t-esc="lot_sizes[pack_operation.lot_id.name]"/></span>
+                                            </b>
+                                       </td>
+                                   </tr>
+                                   <tr>
+                                       <td style="padding:1px;">Product:</td>
+                                       <td style="padding:1px;"><span t-field="pack_operation.product_id"/></td>
+                                   </tr>
+                                   <tr>
+                                       <td style="padding:1px;">Quantity:</td>
+                                       <td style="padding:1px;">
+                                           <span t-field="pack_operation.product_qty"/>
+                                           <span t-field="pack_operation.product_uom_id" groups="product.group_uom"/>
+                                       </td>
+                                   </tr>
+                                   <tr>
+                                       <td style="padding:1px;">Lot Number:</td>
+                                       <td style="padding:1px;">
+                                           <t t-if="pack_operation.lot_id">
+                                               <div class="text-center">
+                                                   <span>
+                                                        <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', pack_operation.lot_id.name, 600, 30)" style="width:300px;height:30px"/>
+                                                   </span>
+                                               </div>
+                                               <div class="text-center"><span t-field="pack_operation.lot_id.name"/></div>
+                                           </t>
+                                       </td>
+                                   </tr>
+                                   <tr>
+                                       <td style="padding:1px;">Reception Date:</td>
+                                       <td style="padding:1px;"><span t-field="o.date_done"></span></td>
+                                   </tr>
+                                   <tr>
+                                       <td style="padding:1px;">
+                                           Package Number:
+                                       </td>
+                                       <td style="padding:1px;">
+                                           <t t-if="pack_operation.package_id">
+                                               <div>
+                                                  <span>
+                                                       <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', pack_operation.package_id.name, 600, 30)" style="width:300px;height:30px"/>
+                                                  </span>
+                                               </div>
+                                               <div><span t-field="pack_operation.package_id"/></div>
+                                           </t>
+                                           <t t-if="pack_operation.result_package_id">
+                                               <div class="text-center">
+                                                   <span>
+                                                        <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', pack_operation.result_package_id.name, 600, 30)" style="width:300px;height:30px"/>
+                                                   </span>
+                                               </div>
+                                               <div class="text-center"><span t-field="pack_operation.result_package_id"/></div>
+                                           </t>
+                                       </td>
+                                   </tr>
+                                </tbody>
+                            </table>
+                            <p style="margin:0px;"><b>External Information</b></p>
+                            <table class="table table-bordered" t-if="o.pack_operation_ids" style="margin:0px;">
+                                <tbody>
+                                    <tr>
+                                        <td style="padding:1px;">Supplier:</td>
+                                        <td style="padding:1px;">
+                                            <t t-if="o.partner_id">
+                                                <span t-field="o.partner_id"/>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <t t-foreach="pack_operation.product_id.seller_ids" t-as="seller">
+                                        <t t-if="seller.name == o.partner_id">
+                                            <tr>
+                                                <td style="padding:1px;">Supplier Product Name:</td>
+                                                 <td style="padding:1px;">[<span t-field="seller.product_code"/>] <span t-field="seller.product_name"/></td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr>
+                                        <td style="padding:1px;">Supplier Lot Number:</td>
+                                        <td style="padding:1px;">
+                                            <t t-if="pack_operation.lot_id">
+                                                <div class="text-center">
+                                                    <span>
+                                                         <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', pack_operation.lot_id.ref, 600, 30)" style="width:300px;height:30px"/>
+                                                    </span>
+                                                </div>
+                                                <div class="text-center"><span t-field="pack_operation.lot_id.ref"/></div>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:1px;">Manufacturer:</td>
+                                        <td style="padding:1px;">
+                                            <t t-if="pack_operation.product_id.manufacturer">
+                                                <span t-field="pack_operation.product_id.manufacturer"/>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:1px;">Manufacturer Product Code:</td>
+                                        <td style="padding:1px;">
+                                            <t t-if="pack_operation.product_id.manufacturer_pref">
+                                                <span t-field="pack_operation.product_id.manufacturer_pref"/>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <t t-if="pack_operation.lot_id">
+                                        <t t-if="pack_operation.lot_id.retest_date">
+                                            <tr>
+
+                                                <td style="padding:1px;">Retest Date:</td>
+                                                <td style="padding:1px;">
+                                                    <span t-field="pack_operation.lot_id.retest_date"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="pack_operation.lot_id.expiry_date">
+                                            <tr>
+                                                <td style="padding:1px;">Expiry Date:</td>
+                                                <td style="padding:1px;">
+                                                    <span t-field="pack_operation.lot_id.expiry_date"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</openerp>

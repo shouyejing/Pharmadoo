@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="report_product_vignette">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page"
+                         t-foreach="range(int(o.product_qty))" t-as="i"
+                         style="margin-left:0px; padding-left:0px;">
+
+                        <div class="col-xs-9 text-center"  style="font-size:6px; padding-left:0px; margin-left:0px;">
+                            <div><span>VIGNETTE <t t-esc="o.company_id.name"/></span></div>
+                            <div><span t-field="o.product_id.name"/></div>
+                            <div><span><t t-esc="o.product_id.active_principal"/></span></div>
+                            <div><span t-field="o.product_id.product_dose"/></div>
+                            <div>
+                                <span>
+                                    PPA:<t t-esc="o.product_id.public_algerian_price"/>+SHP<t t-esc="o.product_id.shp_rate"/>
+                                </span>
+                            </div>
+                            <div>
+                                <span>
+                                    <strong>PPA:</strong><t t-esc="o.product_id.public_algerian_price + o.product_id.shp_rate"/>DA
+                                </span>
+                            </div>
+                            <div><span>TR:<t t-esc="o.product_id.reference_rate"/> DA</span></div>
+                        </div>
+
+                        <div class="col-xs-3" style="font-size:6px;margin:0px; padding:0px;">
+                            <div style="transform: rotate(90deg);
+                                        -webkit-transform: rotate(90deg);
+                                        -ms-transform: rotate(90deg);
+                                        -webkit-transform-origin: 60% 75%;
+                                        -ms-transform-origin: 60% 75%;
+                                        transform-origin: 60% 75%;">
+
+                                    LOT:<span t-esc="o.mrp_lot_id.name"/>
+                                    <span>FAB:<t t-esc="time.strftime('%m/%y',time.strptime(o.date_finished or '3000-01-01 08:00:00','%Y-%m-%d %H:%S:%M')) or ''"/></span>
+                                    <span>PER:<t t-esc="time.strftime('%m/%y',time.strptime(o.mrp_lot_id.expiry_date or '3000-01-01','%Y-%m-%d'))"/></span>
+                                    <span>DE:<t t-esc="o.product_id.de_reference"/></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </template>
+
+
+    </data>
+</openerp>

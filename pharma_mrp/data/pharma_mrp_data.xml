@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="sequence_pharma_mrp_type_qco" model="ir.sequence.type">
+            <field name="name">Quality Control Order</field>
+            <field name="code">mrp.production.qco</field>
+        </record>
+
+        <record id="sequence_pharma_mrp_qco" model="ir.sequence">
+            <field name="name">Quality Control Order</field>
+            <field name="code">mrp.production.qco</field>
+            <field name="prefix">QCO</field>
+            <field name="padding">6</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+
+        <record id="sequence_pharma_mrp_type_mbo" model="ir.sequence.type">
+            <field name="name">Micro Biology Order</field>
+            <field name="code">mrp.production.mbo</field>
+        </record>
+
+        <record id="sequence_pharma_mrp_mbo" model="ir.sequence">
+            <field name="name">Micro Biology Order</field>
+            <field name="code">mrp.production.mbo</field>
+            <field name="prefix">MBO</field>
+            <field name="padding">6</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+
+        <record id="sequence_pharma_mrp_type_mpo" model="ir.sequence.type">
+            <field name="name">Milieu Production Order</field>
+            <field name="code">mrp.production.mpo</field>
+        </record>
+
+        <record id="sequence_pharma_mrp_mpo" model="ir.sequence">
+            <field name="name">Milieu Production Order</field>
+            <field name="code">mrp.production.mpo</field>
+            <field name="prefix">MPO</field>
+            <field name="padding">6</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+    </data>
+</openerp>

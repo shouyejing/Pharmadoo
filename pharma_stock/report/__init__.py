@@ -1,0 +1,1 @@
+import pharma_package_doc

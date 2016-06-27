@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <record id="pharma_rmw_quality_control" model="ir.model.data">
+            <field name="module">pharma_stock</field>
+            <field name="name">pharma_rmw_quality_control_location</field>
+            <field name="model">stock.location</field>
+            <field name="res_id">21</field>
+            <field name="noupdate" eval="True"></field>
+        </record>
+
+        <record id="pharma_rmw_stock" model="ir.model.data">
+            <field name="module">pharma_stock</field>
+            <field name="name">pharma_rmw_stock_location</field>
+            <field name="model">stock.location</field>
+            <field name="res_id">19</field>
+            <field name="noupdate" eval="True"></field>
+        </record>
+
+        <record id="pharma_rmw_weighting_stock" model="ir.model.data">
+            <field name="module">pharma_stock</field>
+            <field name="name">pharma_rmw_weighting_location</field>
+            <field name="model">stock.location</field>
+            <field name="res_id">30</field>
+            <field name="noupdate" eval="True"></field>
+        </record>
+
+
+        <record id="pharma_release_materials_type" model="ir.model.data">
+            <field name="module">pharma_stock</field>
+            <field name="name">pharma_release_materials_picking_type</field>
+            <field name="model">stock.picking.type</field>
+            <field name="res_id">8</field>
+            <field name="noupdate" eval="True"></field>
+        </record>
+
+        <record id="pharma_qc_attribute" model="ir.model.data">
+            <field name="module">pharma_stock</field>
+            <field name="name">pharma_qc_product_attribute</field>
+            <field name="model">product.attribute</field>
+            <field name="res_id">2</field>
+            <field name="noupdate" eval="True"></field>
+        </record>
+
+
+
+
+    </data>
+</openerp>

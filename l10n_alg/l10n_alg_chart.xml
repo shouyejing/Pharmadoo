@@ -1,0 +1,2856 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+
+        <!--Account Types-->
+        <record model="account.account.type" id="account_type_actifs">
+            <field name="name">Actifs</field>
+            <field name="code">asset</field>
+            <field name="report_type">asset</field>
+            <field name="close_method">unreconciled</field>
+        </record>
+
+        <record model="account.account.type" id="account_type_vue_des_actifs">
+            <field name="name">Vue des actifs</field>
+            <field name="code">asset</field>
+            <field name="report_type">asset</field>
+            <field name="close_method">none</field>
+        </record>
+
+        <record model="account.account.type" id="account_type_bank">
+            <field name="name">Banque</field>
+            <field name="code">bank</field>
+            <field name="report_type">asset</field>
+            <field name="close_method">balance</field>
+        </record>
+        <record model="account.account.type" id="account_type_cash">
+            <field name="name">Liquidités</field>
+            <field name="code">cash</field>
+            <field name="report_type">asset</field>
+            <field name="close_method">balance</field>
+        </record>
+        <record model="account.account.type" id="account_type_check">
+            <field name="name">Chèque</field>
+            <field name="code">check</field>
+            <field name="report_type">asset</field>
+            <field name="close_method">balance</field>
+        </record>
+        <record model="account.account.type" id="account_type_equity">
+            <field name="name">Capitaux propres</field>
+            <field name="code">equity</field>
+            <field name="report_type">asset</field>
+            <field name="close_method">unreconciled</field>
+        </record>
+        <record model="account.account.type" id="account_type_expenses">
+            <field name="name">Charges</field>
+            <field name="code">expense</field>
+            <field name="report_type">expense</field>
+            <field name="close_method">none</field>
+        </record>
+        <record model="account.account.type" id="account_type_expenses_view">
+            <field name="name">Vue des dépenses</field>
+            <field name="code">expense</field>
+            <field name="report_type">expense</field>
+            <field name="close_method">none</field>
+        </record>
+        <record model="account.account.type" id="account_type_product_income">
+            <field name="name">Produits</field>
+            <field name="code">income</field>
+            <field name="report_type">income</field>
+            <field name="report_type">none</field>
+        </record>
+        <record model="account.account.type" id="account_type_liability">
+            <field name="name">Passif</field>
+            <field name="code">liability</field>
+            <field name="report_type">asset</field>
+            <field name="close_method">unreconciled</field>
+        </record>
+        <record model="account.account.type" id="account_type_liability_view">
+            <field name="name">Liability View</field>
+            <field name="code">liability</field>
+            <field name="report_type">asset</field>
+            <field name="report_type">none</field>
+        </record>
+        <record model="account.account.type" id="account_type_supplier">
+            <field name="name">Fournisseur</field>
+            <field name="code">payable</field>
+            <field name="report_type">asset</field>
+            <field name="close_method">unreconciled</field>
+        </record>
+        <record model="account.account.type" id="account_type_customer">
+            <field name="name">Compte client</field>
+            <field name="code">receivable</field>
+            <field name="report_type">asset</field>
+            <field name="close_method">unreconciled</field>
+        </record>
+        <record model="account.account.type" id="account_type_tax">
+            <field name="name">Tax</field>
+            <field name="code">tax</field>
+            <field name="report_type">expense</field>
+            <field name="close_method">unreconciled</field>
+        </record>
+        <record model="account.account.type" id="account_type_revenues_view">
+            <field name="name">Vue des revenus</field>
+            <field name="code">view</field>
+            <field name="report_type">income</field>
+            <field name="close_method">none</field>
+        </record>
+        <record model="account.account.type" id="account_type_root_view">
+            <field name="name">Racine/vue</field>
+            <field name="code">view</field>
+            <field name="report_type">none</field>
+            <field name="close_method">none</field>
+        </record>
+        <!--En of Account Type-->
+
+        <!--Account Main Groups-->
+        <record id="account_account_class_00" model="account.account.template">
+            <field name="code">0</field>
+            <field name="name">Plan Comptable Algerian</field>
+            <field eval="0" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_root_view"/>
+        </record>
+
+        <record id="account_account_class_01" model="account.account.template">
+            <field name="code">1</field>
+            <field name="name">CLASSE 1- Comptes de capitaux</field>
+            <field ref="account_account_class_00" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_root_view"/>
+        </record>
+        <record id="account_account_class_02" model="account.account.template">
+            <field name="code">2</field>
+            <field name="name">CLASSE 2- COMPTES D'IMMOBILISATIONS</field>
+            <field ref="account_account_class_00" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_root_view"/>
+        </record>
+        <record id="account_account_class_03" model="account.account.template">
+            <field name="code">3</field>
+            <field name="name">CLASSE 3- COMPTES DE STOCKS ET EN-COURS</field>
+            <field ref="account_account_class_00" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_root_view"/>
+        </record>
+        <record id="account_account_class_04" model="account.account.template">
+            <field name="code">4</field>
+            <field name="name">CLASSE 4 - COMPTES DE TIERS</field>
+            <field eval="account_account_class_00" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_root_view"/>
+        </record>
+        <record id="account_account_class_05" model="account.account.template">
+            <field name="code">5</field>
+            <field name="name">CLASSE 5 - COMPTES FINANCIERS</field>
+            <field ref="account_account_class_00" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_root_view"/>
+        </record>
+        <record id="account_account_class_06" model="account.account.template">
+            <field name="code">6</field>
+            <field name="name">CLASSE 6 : COMPTES DE CHARGES</field>
+            <field ref="account_account_class_00" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_root_view"/>
+        </record>
+        <record id="account_account_class_07" model="account.account.template">
+            <field name="code">7</field>
+            <field name="name">CLASSE 7 - COMPTES DE PRODUITS</field>
+            <field ref="account_account_class_00" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_root_view"/>
+        </record>
+
+        <!--End of Account Main Groups-->
+
+
+        <!-- Account Templates of Class 1-->
+        <record id="account_account_class_10" model="account.account.template">
+            <field name="code">100000</field>
+            <field name="name">Capital réserves et assimilés</field>
+            <field ref="account_account_class_01" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+
+
+        <record id="account_account_class_103" model="account.account.template">
+            <field name="code">103000</field>
+            <field name="name">Primes liées au capital social</field>
+            <field ref="account_account_class_10" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+
+        <record id="account_account_class_104" model="account.account.template">
+            <field name="code">104000</field>
+            <field name="name">Ecart d'évaluation</field>
+            <field ref="account_account_class_10" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+
+        <record id="account_account_class_105" model="account.account.template">
+            <field name="code">105000</field>
+            <field name="name">Ecart de réévaluation</field>
+            <field ref="account_account_class_10" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+
+        <record id="account_account_class_106" model="account.account.template">
+            <field name="code">106000</field>
+            <field name="name">Réserves (légale; statutaire; ordinaire; réglementée)</field>
+            <field ref="account_account_class_10" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+
+        <record id="account_account_class_107" model="account.account.template">
+            <field name="code">107000</field>
+            <field name="name">Ecart d'équivalence</field>
+            <field ref="account_account_class_10" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+
+        <record id="account_account_class_108" model="account.account.template">
+            <field name="code">108000</field>
+            <field name="name">Compte de l'exploitant</field>
+            <field ref="account_account_class_10" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+
+        <record id="account_account_class_109" model="account.account.template">
+            <field name="code">109000</field>
+            <field name="name">Capital souscrit non appelé</field>
+            <field ref="account_account_class_10" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+
+        <record id="account_account_class_11" model="account.account.template">
+            <field name="code">110000</field>
+            <field name="name">Report à nouveau</field>
+            <field ref="account_account_class_01" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_12" model="account.account.template">
+            <field name="code">120000</field>
+            <field name="name">Résultat de l'exercice</field>
+            <field ref="account_account_class_01" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+
+
+        <record id="account_account_class_13" model="account.account.template">
+            <field name="code">130000</field>
+            <field name="name">Produits et charges différés hors cycle d'exploitation</field>
+            <field ref="account_account_class_01" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_131" model="account.account.template">
+            <field name="code">131000</field>
+            <field name="name">Subventions d'équipement</field>
+            <field ref="account_account_class_13" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_132" model="account.account.template">
+            <field name="code">132000</field>
+            <field name="name">Autres subventions d'investissements</field>
+            <field ref="account_account_class_13" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_133" model="account.account.template">
+            <field name="code">133000</field>
+            <field name="name">Produits et charges différés hors cycle d'exploitation</field>
+            <field ref="account_account_class_13" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_134" model="account.account.template">
+            <field name="code">134000</field>
+            <field name="name">Impôts différés actif</field>
+            <field ref="account_account_class_13" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_138" model="account.account.template">
+            <field name="code">138000</field>
+            <field name="name">Autres produits et charges différés</field>
+            <field ref="account_account_class_13" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+
+
+
+        <record id="account_account_class_15" model="account.account.template">
+            <field name="code">150000</field>
+            <field name="name">Provisions pour charges-passifs non courants</field>
+            <field ref="account_account_class_01" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_153" model="account.account.template">
+            <field name="code">153000</field>
+            <field name="name">Provisions pour pensions et obligations similaires</field>
+            <field ref="account_account_class_15" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_155" model="account.account.template">
+            <field name="code">155000</field>
+            <field name="name">Provisions pour impôts</field>
+            <field ref="account_account_class_15" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_156" model="account.account.template">
+            <field name="code">156000</field>
+            <field name="name">Provisions pour renouvellement des immobilisations (concession)</field>
+            <field ref="account_account_class_15" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_158" model="account.account.template">
+            <field name="code">158000</field>
+            <field name="name">Autre provisions pour charges- passifs non courants</field>
+            <field ref="account_account_class_15" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+
+
+        <record id="account_account_class_16" model="account.account.template">
+            <field name="code">160000</field>
+            <field name="name">Emprunts et dettes assimilés</field>
+            <field ref="account_account_class_01" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_161" model="account.account.template">
+            <field name="code">161000</field>
+            <field name="name">Titres participatifs</field>
+            <field ref="account_account_class_16" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_162" model="account.account.template">
+            <field name="code">162000</field>
+            <field name="name">Emprunts obligataires convertibles</field>
+            <field ref="account_account_class_16" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_163" model="account.account.template">
+            <field name="code">163000</field>
+            <field name="name">Autres emprunts obligataires</field>
+            <field ref="account_account_class_16" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_164" model="account.account.template">
+            <field name="code">164000</field>
+            <field name="name">Emprunts auprès des établissements de crédit</field>
+            <field ref="account_account_class_16" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_165" model="account.account.template">
+            <field name="code">165000</field>
+            <field name="name">Dépôts et cautionnements reçus</field>
+            <field ref="account_account_class_16" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_167" model="account.account.template">
+            <field name="code">167000</field>
+            <field name="name">Dettes sur contrat de location - financement</field>
+            <field ref="account_account_class_16" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_168" model="account.account.template">
+            <field name="code">168000</field>
+            <field name="name">Autres emprunts et dettes assimilés</field>
+            <field ref="account_account_class_16" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_169" model="account.account.template">
+            <field name="code">169000</field>
+            <field name="name">Primes de remboursement des obligations</field>
+            <field ref="account_account_class_16" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+
+
+
+        <record id="account_account_class_17" model="account.account.template">
+            <field name="code">170000</field>
+            <field name="name">Dettes rattachées à des participations</field>
+            <field ref="account_account_class_01" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_171" model="account.account.template">
+            <field name="code">171000</field>
+            <field name="name">Dettes rattachées à des participations groupe</field>
+            <field ref="account_account_class_17" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_172" model="account.account.template">
+            <field name="code">172000</field>
+            <field name="name">Dettes rattachées à participations hors groupe</field>
+            <field ref="account_account_class_17" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_173" model="account.account.template">
+            <field name="code">173000</field>
+            <field name="name">Dettes rattachées à des sociétés en participation</field>
+            <field ref="account_account_class_17" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_178" model="account.account.template">
+            <field name="code">178000</field>
+            <field name="name">Autres dettes rattachés à des participations</field>
+            <field ref="account_account_class_17" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+
+
+
+        <record id="account_account_class_18" model="account.account.template">
+            <field name="code">180000</field>
+            <field name="name">Comptes de liaison des établissements et sociétés en participation</field>
+            <field ref="account_account_class_01" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_181" model="account.account.template">
+            <field name="code">181000</field>
+            <field name="name">Comptes de liaison entre établissements</field>
+            <field ref="account_account_class_18" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+        <record id="account_account_class_188" model="account.account.template">
+            <field name="code">188000</field>
+            <field name="name">Comptes de liaison entre sociétés en participation</field>
+            <field ref="account_account_class_18" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_equity"/>
+        </record>
+
+
+        <!--End of Accounts for Class 01-->
+
+        <!--Accounts for Class 02-->
+        <record id="account_account_class_20" model="account.account.template">
+            <field name="code">200000</field>
+            <field name="name">Immobilisations incorporelles</field>
+            <field ref="account_account_class_02" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_203" model="account.account.template">
+            <field name="code">203000</field>
+            <field name="name">Frais de développement immobilisables</field>
+            <field ref="account_account_class_20" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_204" model="account.account.template">
+            <field name="code">204000</field>
+            <field name="name">Logiciels informatiques et assimilés</field>
+            <field ref="account_account_class_20" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_205" model="account.account.template">
+            <field name="code">205000</field>
+            <field name="name">Concessions et droits similaires; brevets; licences; marques</field>
+            <field ref="account_account_class_20" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_207" model="account.account.template">
+            <field name="code">207000</field>
+            <field name="name">Ecart d'acquisition- « goodwill »</field>
+            <field ref="account_account_class_20" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_208" model="account.account.template">
+            <field name="code">208000</field>
+            <field name="name">Autres immobilisations incorporelles</field>
+            <field ref="account_account_class_20" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_21" model="account.account.template">
+            <field name="code">210000</field>
+            <field name="name">Immobilisations corporelles</field>
+            <field ref="account_account_class_02" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_211" model="account.account.template">
+            <field name="code">211000</field>
+            <field name="name">Terrains</field>
+            <field ref="account_account_class_21" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_212" model="account.account.template">
+            <field name="code">212000</field>
+            <field name="name">Agencements et aménagements de terrain</field>
+            <field ref="account_account_class_21" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_213" model="account.account.template">
+            <field name="code">213000</field>
+            <field name="name">Constructions</field>
+            <field ref="account_account_class_21" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_215" model="account.account.template">
+            <field name="code">215000</field>
+            <field name="name">Installations techniques; matériel et outillage industriels</field>
+            <field ref="account_account_class_21" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2151" model="account.account.template">
+            <field name="code">215100</field>
+            <field name="name">Equipement de production</field>
+            <field ref="account_account_class_21" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_218" model="account.account.template">
+            <field name="code">218000</field>
+            <field name="name">Autres immobilisations corporelles</field>
+            <field ref="account_account_class_21" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2181" model="account.account.template">
+            <field name="code">218100</field>
+            <field name="name">Licences et logiciels informatique</field>
+            <field ref="account_account_class_218" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2182" model="account.account.template">
+            <field name="code">218200</field>
+            <field name="name">Matériel de Transport</field>
+            <field ref="account_account_class_218" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2183" model="account.account.template">
+            <field name="code">218300</field>
+            <field name="name">Matériel et Equipement de bureau</field>
+            <field ref="account_account_class_218" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2184" model="account.account.template">
+            <field name="code">218400</field>
+            <field name="name">Matériel Informatique</field>
+            <field ref="account_account_class_218" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2185" model="account.account.template">
+            <field name="code">218500</field>
+            <field name="name">Agencement et Installation</field>
+            <field ref="account_account_class_218" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2186" model="account.account.template">
+            <field name="code">218600</field>
+            <field name="name">Autres immo corporelles</field>
+            <field ref="account_account_class_218" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+
+        <record id="account_account_class_22" model="account.account.template">
+            <field name="code">220000</field>
+            <field name="name">Immobilisations en concession</field>
+            <field ref="account_account_class_02" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_221" model="account.account.template">
+            <field name="code">221000</field>
+            <field name="name">Terrains en concession</field>
+            <field ref="account_account_class_22" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_222" model="account.account.template">
+            <field name="code">222000</field>
+            <field name="name">Agencements et aménagements de terrain en concession</field>
+            <field ref="account_account_class_22" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_223" model="account.account.template">
+            <field name="code">223000</field>
+            <field name="name">Constructions en concession</field>
+            <field ref="account_account_class_22" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_225" model="account.account.template">
+            <field name="code">225000</field>
+            <field name="name">Installations techniques en concession</field>
+            <field ref="account_account_class_22" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_228" model="account.account.template">
+            <field name="code">228000</field>
+            <field name="name">Autres immobilisations corporelles en concession</field>
+            <field ref="account_account_class_22" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_229" model="account.account.template">
+            <field name="code">229000</field>
+            <field name="name">Droits du concédant</field>
+            <field ref="account_account_class_22" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_23" model="account.account.template">
+            <field name="code">230000</field>
+            <field name="name">Immobilisations en cours</field>
+            <field ref="account_account_class_02" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_232" model="account.account.template">
+            <field name="code">232000</field>
+            <field name="name">Immobilisations corporelles en cours</field>
+            <field ref="account_account_class_23" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_237" model="account.account.template">
+            <field name="code">237000</field>
+            <field name="name">Immobilisations incorporelles en cours</field>
+            <field ref="account_account_class_23" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_238" model="account.account.template">
+            <field name="code">238000</field>
+            <field name="name">Avances et acomptes versés sur commandes d'immobilisations</field>
+            <field ref="account_account_class_23" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+
+
+        <record id="account_account_class_26" model="account.account.template">
+            <field name="code">260000</field>
+            <field name="name">Participations et créances rattachées à des participations</field>
+            <field ref="account_account_class_02" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_261" model="account.account.template">
+            <field name="code">261000</field>
+            <field name="name">Titres de filiales</field>
+            <field ref="account_account_class_26" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_262" model="account.account.template">
+            <field name="code">262000</field>
+            <field name="name">Autres titres de participation</field>
+            <field ref="account_account_class_26" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_265" model="account.account.template">
+            <field name="code">265000</field>
+            <field name="name">Titres de participation evalues par equivalence (entreprises associés)</field>
+            <field ref="account_account_class_26" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_266" model="account.account.template">
+            <field name="code">266000</field>
+            <field name="name">Créances rattachées à des participations groupe</field>
+            <field ref="account_account_class_26" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_267" model="account.account.template">
+            <field name="code">267000</field>
+            <field name="name">Créances rattachées à des participations hors groupe</field>
+            <field ref="account_account_class_26" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_268" model="account.account.template">
+            <field name="code">268000</field>
+            <field name="name">Créances rattachées à des sociétés en participation</field>
+            <field ref="account_account_class_26" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_269" model="account.account.template">
+            <field name="code">269000</field>
+            <field name="name">Versements restant à effectuer sur titres de participation non libérés</field>
+            <field ref="account_account_class_26" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_27" model="account.account.template">
+            <field name="code">270000</field>
+            <field name="name">Capital réserves et assimilés</field>
+            <field ref="account_account_class_02" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+
+        <record id="account_account_class_271" model="account.account.template">
+            <field name="code">271000</field>
+            <field name="name">Titres immobilises autres que les titres immobilises de l'activite de portefeuille</field>
+            <field ref="account_account_class_27" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_272" model="account.account.template">
+            <field name="code">272000</field>
+            <field name="name">Titres representatifs de droit de creance (obligations; bons)</field>
+            <field ref="account_account_class_27" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_273" model="account.account.template">
+            <field name="code">273000</field>
+            <field name="name">Titres immobilises de l'activite de portefeuille</field>
+            <field ref="account_account_class_27" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_274" model="account.account.template">
+            <field name="code">274000</field>
+            <field name="name">Prets et créances sur contrat de location - financement</field>
+            <field ref="account_account_class_27" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_275" model="account.account.template">
+            <field name="code">275000</field>
+            <field name="name">Depets et cautionnement verses</field>
+            <field ref="account_account_class_27" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_276" model="account.account.template">
+            <field name="code">276000</field>
+            <field name="name">Autres créances immobilisées</field>
+            <field ref="account_account_class_27" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_279" model="account.account.template">
+            <field name="code">279000</field>
+            <field name="name">Versements restant à effectuer sur titres immobilises non libérés</field>
+            <field ref="account_account_class_27" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+
+        <record id="account_account_class_28" model="account.account.template">
+            <field name="code">28</field>
+            <field name="name">Amortissement des immobilisations</field>
+            <field ref="account_account_class_02" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_280" model="account.account.template">
+            <field name="code">280000</field>
+            <field name="name">Amortissement des immobilisations incorporelles</field>
+            <field ref="account_account_class_28" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+
+        <record id="account_account_class_2803" model="account.account.template">
+            <field name="code">280300</field>
+            <field name="name">Amortissement des frais de recherche et developpement immobilisables</field>
+            <field ref="account_account_class_280" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2804" model="account.account.template">
+            <field name="code">280400</field>
+            <field name="name">Amortissement des logiciels informatiques et assimilés</field>
+            <field ref="account_account_class_280" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2805" model="account.account.template">
+            <field name="code">280500</field>
+            <field name="name">Amortissement concessions et droits similaires; brevets; licences; marques</field>
+            <field ref="account_account_class_280" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2807" model="account.account.template">
+            <field name="code">280700</field>
+            <field name="name">Amortissement ecart d'acquisition (goodwill)</field>
+            <field ref="account_account_class_280" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2808" model="account.account.template">
+            <field name="code">280800</field>
+            <field name="name">Amortissement autres immobilisations incorporelles</field>
+            <field ref="account_account_class_280" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+
+        <record id="account_account_class_281" model="account.account.template">
+            <field name="code">281000</field>
+            <field name="name">Amortissement des immobilisations corporelles</field>
+            <field ref="account_account_class_28" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_2812" model="account.account.template">
+            <field name="code">281200</field>
+            <field name="name">Amortissement agencements et amenagements de terrain</field>
+            <field ref="account_account_class_281" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2813" model="account.account.template">
+            <field name="code">281300</field>
+            <field name="name">Amortissement constructions</field>
+            <field ref="account_account_class_281" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2815" model="account.account.template">
+            <field name="code">281500</field>
+            <field name="name">Amortissement installations techniques</field>
+            <field ref="account_account_class_281" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2818" model="account.account.template">
+            <field name="code">281800</field>
+            <field name="name">Amortissement autres immobilisations corporelles</field>
+            <field ref="account_account_class_281" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_282" model="account.account.template">
+            <field name="code">282000</field>
+            <field name="name">Amortissement des immobilisations mises en concession</field>
+            <field ref="account_account_class_28" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_29" model="account.account.template">
+            <field name="code">29</field>
+            <field name="name">Pertes de valeur sur immobilisations</field>
+            <field ref="account_account_class_02" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_290" model="account.account.template">
+            <field name="code">290000</field>
+            <field name="name">Pertes de valeur sur immobilisations incorporelles</field>
+            <field ref="account_account_class_29" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2903" model="account.account.template">
+            <field name="code">290300</field>
+            <field name="name">Pertes de valeur sur frais de recherche et developpement immobilisables</field>
+            <field ref="account_account_class_290" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2904" model="account.account.template">
+            <field name="code">290400</field>
+            <field name="name">Pertes de valeur sur logiciels informatiques et assimilés</field>
+            <field ref="account_account_class_290" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2905" model="account.account.template">
+            <field name="code">290500</field>
+            <field name="name">Pertes de valeur sur concessions et droits similaires; brevets; licences; marques</field>
+            <field ref="account_account_class_290" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2907" model="account.account.template">
+            <field name="code">290700</field>
+            <field name="name">Pertes de valeur sur ecart d'acquisition</field>
+            <field ref="account_account_class_290" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2908" model="account.account.template">
+            <field name="code">290800</field>
+            <field name="name">Pertes de valeur sur autres immobilisations incorporelles</field>
+            <field ref="account_account_class_290" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_291" model="account.account.template">
+            <field name="code">291000</field>
+            <field name="name">Pertes de valeur sur immobilisations corporelles</field>
+            <field ref="account_account_class_29" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="False" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2912" model="account.account.template">
+            <field name="code">291200</field>
+            <field name="name">Pertes de valeur sur agencements et amenagements de terrain</field>
+            <field ref="account_account_class_291" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2913" model="account.account.template">
+            <field name="code">291300</field>
+            <field name="name">Pertes de valeur sur constructions</field>
+            <field ref="account_account_class_291" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2915" model="account.account.template">
+            <field name="code">291500</field>
+            <field name="name">Pertes de valeur sur installations techniques</field>
+            <field ref="account_account_class_291" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_2918" model="account.account.template">
+            <field name="code">291800</field>
+            <field name="name">Pertes de valeur sur autres immobilisations corporelles</field>
+            <field ref="account_account_class_291" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_292" model="account.account.template">
+            <field name="code">292000</field>
+            <field name="name">Pertes de valeur sur immobilisations mises en concession</field>
+            <field ref="account_account_class_29" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_293" model="account.account.template">
+            <field name="code">293000</field>
+            <field name="name">Pertes de valeur sur immobilisations en cours</field>
+            <field ref="account_account_class_29" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_296" model="account.account.template">
+            <field name="code">296000</field>
+            <field name="name">Pertes de valeur sur participations et créances rattachées à participations</field>
+            <field ref="account_account_class_29" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_297" model="account.account.template">
+            <field name="code">297000</field>
+            <field name="name">Pertes de valeur sur autres titres immobilises</field>
+            <field ref="account_account_class_29" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_298" model="account.account.template">
+            <field name="code">298000</field>
+            <field name="name">Pertes de valeur sur autres financiers immobilises</field>
+            <field ref="account_account_class_29" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <!--End Of Accounts for Class 2-->
+
+
+        <!--Start Of Accounts for Class 3-->
+
+        <record id="account_account_class_30" model="account.account.template">
+            <field name="code">300000</field>
+            <field name="name">Stocks de marchandises</field>
+            <field ref="account_account_class_03" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_31" model="account.account.template">
+            <field name="code">310000</field>
+            <field name="name">Matieres premieres et fournitures</field>
+            <field ref="account_account_class_03" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_32" model="account.account.template">
+            <field name="code">320000</field>
+            <field name="name">Autres approvisionnements</field>
+            <field ref="account_account_class_03" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_321" model="account.account.template">
+            <field name="code">321000</field>
+            <field name="name">Matières consommables</field>
+            <field ref="account_account_class_32" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_322" model="account.account.template">
+            <field name="code">322000</field>
+            <field name="name">Fournitures consommables</field>
+            <field ref="account_account_class_32" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_326" model="account.account.template">
+            <field name="code">326000</field>
+            <field name="name">Emballages</field>
+            <field ref="account_account_class_32" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_33" model="account.account.template">
+            <field name="code">330000</field>
+            <field name="name">En cours de production des biens</field>
+            <field ref="account_account_class_03" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_331" model="account.account.template">
+            <field name="code">331000</field>
+            <field name="name">Produits en cours</field>
+            <field ref="account_account_class_33" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_335" model="account.account.template">
+            <field name="code">335000</field>
+            <field name="name">Travaux en cours</field>
+            <field ref="account_account_class_33" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_34" model="account.account.template">
+            <field name="code">340000</field>
+            <field name="name">En cours de production de services</field>
+            <field ref="account_account_class_03" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_341" model="account.account.template">
+            <field name="code">341000</field>
+            <field name="name">Etudes en cours</field>
+            <field ref="account_account_class_34" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_345" model="account.account.template">
+            <field name="code">345000</field>
+            <field name="name">Prestations de services en cours</field>
+            <field ref="account_account_class_34" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_35" model="account.account.template">
+            <field name="code">350000</field>
+            <field name="name">Stocks de Produits</field>
+            <field ref="account_account_class_03" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_351" model="account.account.template">
+            <field name="code">351000</field>
+            <field name="name">Produits intermédiaires</field>
+            <field ref="account_account_class_35" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_355" model="account.account.template">
+            <field name="code">355000</field>
+            <field name="name">Produits finis</field>
+            <field ref="account_account_class_35" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_358" model="account.account.template">
+            <field name="code">358000</field>
+            <field name="name">Produits résiduels ou matières de récupération (déchets; rebuts)</field>
+            <field ref="account_account_class_35" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_36" model="account.account.template">
+            <field name="code">360000</field>
+            <field name="name">Stocks provenant d'immobilisations</field>
+            <field ref="account_account_class_03" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_37" model="account.account.template">
+            <field name="code">370000</field>
+            <field name="name">Stocks à l'extérieur (en cours de route; en dépôt ou en consignation)</field>
+            <field ref="account_account_class_03" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_38" model="account.account.template">
+            <field name="code">380000</field>
+            <field name="name">Achats stockés</field>
+            <field ref="account_account_class_03" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_39" model="account.account.template">
+            <field name="code">390000</field>
+            <field name="name">Pertes de valeur sur stocks de marchandises</field>
+            <field ref="account_account_class_03" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_391" model="account.account.template">
+            <field name="code">391000</field>
+            <field name="name">Pertes de valeur sur matieres premieres et fournitures</field>
+            <field ref="account_account_class_39" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_392" model="account.account.template">
+            <field name="code">392000</field>
+            <field name="name">Pertes de valeur sur autres approvisionnements</field>
+            <field ref="account_account_class_39" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_393" model="account.account.template">
+            <field name="code">393000</field>
+            <field name="name">Pertes de valeur sur en cours de production de biens</field>
+            <field ref="account_account_class_39" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_394" model="account.account.template">
+            <field name="code">394000</field>
+            <field name="name">Pertes de valeur sur en cours de production de services</field>
+            <field ref="account_account_class_39" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_395" model="account.account.template">
+            <field name="code">395000</field>
+            <field name="name">Pertes de valeur sur stocks de</field>
+            <field ref="account_account_class_39" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_397" model="account.account.template">
+            <field name="code">397000</field>
+            <field name="name">Pertes de valeur sur stocks à l'exterieur</field>
+            <field ref="account_account_class_39" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <!--End Of Accounts for Class 3-->
+
+        <!--Accounts for Class 4-->
+        <record id="account_account_class_40" model="account.account.template">
+            <field name="code">400000</field>
+            <field name="name">Fournisseurs et comptes rattaches</field>
+            <field ref="account_account_class_04" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_supplier"/>
+        </record>
+        <record id="account_account_class_401" model="account.account.template">
+            <field name="code">401000</field>
+            <field name="name">Fournisseurs de stocks et services</field>
+            <field ref="account_account_class_40" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_supplier"/>
+        </record>
+        <record id="account_account_class_403" model="account.account.template">
+            <field name="code">403000</field>
+            <field name="name">Fournisseurs effets à payer</field>
+            <field ref="account_account_class_40" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_supplier"/>
+        </record>
+        <record id="account_account_class_404" model="account.account.template">
+            <field name="code">404000</field>
+            <field name="name">Fournisseurs d'immobilisations</field>
+            <field ref="account_account_class_40" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_supplier"/>
+        </record>
+        <record id="account_account_class_405" model="account.account.template">
+            <field name="code">405000</field>
+            <field name="name">Fournisseurs d'immobilisations effets à payer</field>
+            <field ref="account_account_class_40" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_supplier"/>
+        </record>
+        <record id="account_account_class_408" model="account.account.template">
+            <field name="code">408000</field>
+            <field name="name">Fournisseurs factures non parvenues</field>
+            <field ref="account_account_class_40" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_supplier"/>
+        </record>
+        <record id="account_account_class_409" model="account.account.template">
+            <field name="code">409000</field>
+            <field name="name">Fournisseurs débiteurs : avances et acomptes versés; RRR à obtenir; autres créances</field>
+            <field ref="account_account_class_40" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_supplier"/>
+        </record>
+
+        <record id="account_account_class_41" model="account.account.template">
+            <field name="code">410000</field>
+            <field name="name">Clients et comptes rattachés</field>
+            <field ref="account_account_class_04" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_customer"/>
+        </record>
+        <record id="account_account_class_411" model="account.account.template">
+            <field name="code">411000</field>
+            <field name="name">Clients</field>
+            <field ref="account_account_class_41" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_customer"/>
+        </record>
+        <record id="account_account_class_413" model="account.account.template">
+            <field name="code">413000</field>
+            <field name="name">Clients; effets à recevoir</field>
+            <field ref="account_account_class_41" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_customer"/>
+        </record>
+        <record id="account_account_class_416" model="account.account.template">
+            <field name="code">416000</field>
+            <field name="name">Clients douteux</field>
+            <field ref="account_account_class_41" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_customer"/>
+        </record>
+        <record id="account_account_class_417" model="account.account.template">
+            <field name="code">417000</field>
+            <field name="name">Créances sur travaux ou prestation en cours</field>
+            <field ref="account_account_class_41" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_customer"/>
+        </record>
+        <record id="account_account_class_418" model="account.account.template">
+            <field name="code">418000</field>
+            <field name="name">Clients -Produits non encore facturés</field>
+            <field ref="account_account_class_41" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_customer"/>
+        </record>
+        <record id="account_account_class_419" model="account.account.template">
+            <field name="code">419000</field>
+            <field name="name">Clients créditeurs -avances reçues; RRR à accorder et autres avoirs à établir</field>
+            <field ref="account_account_class_41" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_customer"/>
+        </record>
+
+        <record id="account_account_class_42" model="account.account.template">
+            <field name="code">420000</field>
+            <field name="name">Personnel et comptes rattaches</field>
+            <field ref="account_account_class_04" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_421" model="account.account.template">
+            <field name="code">421000</field>
+            <field name="name">Personnel; remunerations dues</field>
+            <field ref="account_account_class_42" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_422" model="account.account.template">
+            <field name="code">422000</field>
+            <field name="name">Fonds des oeuvres sociales</field>
+            <field ref="account_account_class_42" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_423" model="account.account.template">
+            <field name="code">423000</field>
+            <field name="name">Participation des salaries au résultat</field>
+            <field ref="account_account_class_42" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_425" model="account.account.template">
+            <field name="code">425000</field>
+            <field name="name">Personnel; avances et acomptes accordes</field>
+            <field ref="account_account_class_42" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_426" model="account.account.template">
+            <field name="code">426000</field>
+            <field name="name">Personnel; depets reeus</field>
+            <field ref="account_account_class_42" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_427" model="account.account.template">
+            <field name="code">427000</field>
+            <field name="name">Personnel; oppositions</field>
+            <field ref="account_account_class_42" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_428" model="account.account.template">
+            <field name="code">428000</field>
+            <field name="name">Personnel; account.data_account_type_expense à payer et account.data_account_type_income à recevoir</field>
+            <field ref="account_account_class_42" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+
+        <record id="account_account_class_43" model="account.account.template">
+            <field name="code">430000</field>
+            <field name="name">Organismes sociaux et comptes rattaches</field>
+            <field ref="account_account_class_04" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_431" model="account.account.template">
+            <field name="code">431000</field>
+            <field name="name">Securite sociale</field>
+            <field ref="account_account_class_43" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_432" model="account.account.template">
+            <field name="code">432000</field>
+            <field name="name">Autres organismes sociaux</field>
+            <field ref="account_account_class_43" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_438" model="account.account.template">
+            <field name="code">438000</field>
+            <field name="name">Organismes sociaux; charges à payer et produits à recevoir</field>
+            <field ref="account_account_class_43" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+
+        <record id="account_account_class_44" model="account.account.template">
+            <field name="code">440000</field>
+            <field name="name">Etat; collectivites publiques; organismes internationaux et comptes rattaches</field>
+            <field ref="account_account_class_04" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_441" model="account.account.template">
+            <field name="code">441000</field>
+            <field name="name">Etat et autres collectivites publiques; subventions à recevoir</field>
+            <field ref="account_account_class_44" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_442" model="account.account.template">
+            <field name="code">442000</field>
+            <field name="name">Etat; impets et taxes recouvrables sur des tiers</field>
+            <field ref="account_account_class_44" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_443" model="account.account.template">
+            <field name="code">443000</field>
+            <field name="name">Operations particulieres avec l'etat et les collectivites publiques</field>
+            <field ref="account_account_class_44" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_444" model="account.account.template">
+            <field name="code">444000</field>
+            <field name="name">Etat; impets sur les résultats</field>
+            <field ref="account_account_class_44" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_445" model="account.account.template">
+            <field name="code">445000</field>
+            <field name="name">Etat; taxes sur le chiffre d'affaires</field>
+            <field ref="account_account_class_44" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_446" model="account.account.template">
+            <field name="code">446000</field>
+            <field name="name">Organismes internationaux</field>
+            <field ref="account_account_class_44" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_447" model="account.account.template">
+            <field name="code">447000</field>
+            <field name="name">Autres impets; taxes et versements assimilés</field>
+            <field ref="account_account_class_44" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_448" model="account.account.template">
+            <field name="code">448000</field>
+            <field name="name">Etat; charges à payer et produits  à recevoir (hors impets)</field>
+            <field ref="account_account_class_44" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_45" model="account.account.template">
+            <field name="code">450000</field>
+            <field name="name">Groupes et associés</field>
+            <field ref="account_account_class_04" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_46" model="account.account.template">
+            <field name="code">460000</field>
+            <field name="name">Debiteurs divers et créditeurs divers</field>
+            <field ref="account_account_class_04" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_462" model="account.account.template">
+            <field name="code">462000</field>
+            <field name="name">Créances sur cessions d'immobilisations</field>
+            <field ref="account_account_class_46" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_464" model="account.account.template">
+            <field name="code">464000</field>
+            <field name="name">Dettes sur acquisitions valeurs mobilières de placement et instruments financiers derives</field>
+            <field ref="account_account_class_46" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_465" model="account.account.template">
+            <field name="code">465000</field>
+            <field name="name">Créances sur cessions valeurs mobilières de placement et instruments financiers derives</field>
+            <field ref="account_account_class_46" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_467" model="account.account.template">
+            <field name="code">467000</field>
+            <field name="name">Autres comptes débiteurs ou créditeurs</field>
+            <field ref="account_account_class_46" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_468" model="account.account.template">
+            <field name="code">468000</field>
+            <field name="name">Divers charges à payer et à recevoir</field>
+            <field ref="account_account_class_46" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_47" model="account.account.template">
+            <field name="code">470000</field>
+            <field name="name">Comptes transitoires ou d'attente</field>
+            <field ref="account_account_class_04" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_48" model="account.account.template">
+            <field name="code">480000</field>
+            <field name="name">Charges ou produits constates d'avances et provisions</field>
+            <field ref="account_account_class_04" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_481" model="account.account.template">
+            <field name="code">481000</field>
+            <field name="name">Provisions - passifs courants</field>
+            <field ref="account_account_class_46" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_486" model="account.account.template">
+            <field name="code">486000</field>
+            <field name="name">Charges constatees d'avance</field>
+            <field ref="account_account_class_46" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_487" model="account.account.template">
+            <field name="code">487000</field>
+            <field name="name">Produits constates d'avance</field>
+            <field ref="account_account_class_46" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_49" model="account.account.template">
+            <field name="code">490000</field>
+            <field name="name">Pertes de valeur sur comptes de tiers</field>
+            <field ref="account_account_class_04" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_491" model="account.account.template">
+            <field name="code">491000</field>
+            <field name="name">Pertes de valeur sur comptes de clients</field>
+            <field ref="account_account_class_49" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_495" model="account.account.template">
+            <field name="code">495000</field>
+            <field name="name">Pertes de valeur sur comptes du groupe et sur associés</field>
+            <field ref="account_account_class_49" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_496" model="account.account.template">
+            <field name="code">496000</field>
+            <field name="name">Pertes de valeur sur comptes de débiteurs divers</field>
+            <field ref="account_account_class_49" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_498" model="account.account.template">
+            <field name="code">498000</field>
+            <field name="name">Pertes de valeur sur autres comptes de tiers</field>
+            <field ref="account_account_class_49" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <!-- End of Class 4-->
+
+        <!-- Start Class 5-->
+        <record id="account_account_class_50" model="account.account.template">
+            <field name="code">500000</field>
+            <field name="name">Valeurs mobilières de placement</field>
+            <field ref="account_account_class_05" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_501" model="account.account.template">
+            <field name="code">501000</field>
+            <field name="name">Part dans des entreprises liées</field>
+            <field ref="account_account_class_50" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_502" model="account.account.template">
+            <field name="code">502000</field>
+            <field name="name">Actions propres</field>
+            <field ref="account_account_class_50" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_503" model="account.account.template">
+            <field name="code">503000</field>
+            <field name="name">Autres actions ou titres conferant un droit de propriete</field>
+            <field ref="account_account_class_50" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_506" model="account.account.template">
+            <field name="code">506000</field>
+            <field name="name">Obligations; bons du trésor et bons de caisse à court terme</field>
+            <field ref="account_account_class_50" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_508" model="account.account.template">
+            <field name="code">508000</field>
+            <field name="name">Autres valeurs mobilières de placement et créances assimilés</field>
+            <field ref="account_account_class_50" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_509" model="account.account.template">
+            <field name="code">509000</field>
+            <field name="name">Versements restant à effectuer sur valeurs mobilières de placement non liberees</field>
+            <field ref="account_account_class_50" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_51" model="account.account.template">
+            <field name="code">510000</field>
+            <field name="name">Valeurs mobilières de placement</field>
+            <field ref="account_account_class_05" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_bank"/>
+        </record>
+        <record id="account_account_class_511" model="account.account.template">
+            <field name="code">511000</field>
+            <field name="name">Valeurs à l'encaissement</field>
+            <field ref="account_account_class_51" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_bank"/>
+        </record>
+        <record id="account_account_class_512" model="account.account.template">
+            <field name="code">512000</field>
+            <field name="name">Banque</field>
+            <field ref="account_account_class_51" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_bank"/>
+        </record>
+        <record id="account_account_class_515" model="account.account.template">
+            <field name="code">515000</field>
+            <field name="name">Trésor public et établissements publics</field>
+            <field ref="account_account_class_51" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_bank"/>
+        </record>
+        <record id="account_account_class_517" model="account.account.template">
+            <field name="code">517000</field>
+            <field name="name">Autres organismes financiers</field>
+            <field ref="account_account_class_51" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_bank"/>
+        </record>
+        <record id="account_account_class_518" model="account.account.template">
+            <field name="code">518000</field>
+            <field name="name">Interets courus</field>
+            <field ref="account_account_class_51" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_bank"/>
+        </record>
+        <record id="account_account_class_519" model="account.account.template">
+            <field name="code">519000</field>
+            <field name="name">Concours bancaires courants</field>
+            <field ref="account_account_class_51" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_bank"/>
+        </record>
+
+        <record id="account_account_class_52" model="account.account.template">
+            <field name="code">520000</field>
+            <field name="name">Instruments financiers dérivés</field>
+            <field ref="account_account_class_05" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_bank"/>
+        </record>
+
+        <record id="account_account_class_53" model="account.account.template">
+            <field name="code">530000</field>
+            <field name="name">Caisse</field>
+            <field ref="account_account_class_05" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_cash"/>
+        </record>
+        <record id="account_account_class_54" model="account.account.template">
+            <field name="code">540000</field>
+            <field name="name">Régies d'avances et accréditifs</field>
+            <field ref="account_account_class_05" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_cash"/>
+        </record>
+        <record id="account_account_class_541" model="account.account.template">
+            <field name="code">541000</field>
+            <field name="name">Régies d'avances</field>
+            <field ref="account_account_class_54" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_cash"/>
+        </record>
+        <record id="account_account_class_542" model="account.account.template">
+            <field name="code">542000</field>
+            <field name="name">accreditifs</field>
+            <field ref="account_account_class_54" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_cash"/>
+        </record>
+
+        <record id="account_account_class_58" model="account.account.template">
+            <field name="code">580000</field>
+            <field name="name">Virements internes</field>
+            <field ref="account_account_class_05" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_cash"/>
+        </record>
+
+        <record id="account_account_class_581" model="account.account.template">
+            <field name="code">581000</field>
+            <field name="name">Virements de fonds</field>
+            <field ref="account_account_class_58" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_cash"/>
+        </record>
+        <record id="account_account_class_588" model="account.account.template">
+            <field name="code">588000</field>
+            <field name="name">Autres virements internes</field>
+            <field ref="account_account_class_58" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_cash"/>
+        </record>
+
+        <record id="account_account_class_59" model="account.account.template">
+            <field name="code">590000</field>
+            <field name="name">Pertes de valeur sur actifs financiers courants</field>
+            <field ref="account_account_class_05" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <record id="account_account_class_591" model="account.account.template">
+            <field name="code">591000</field>
+            <field name="name">Pertes de valeur sur valeurs en banque et établissements financiers</field>
+            <field ref="account_account_class_59" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+        <record id="account_account_class_594" model="account.account.template">
+            <field name="code">594000</field>
+            <field name="name">Pertes de valeurs sur regies d'avances et accreditifs</field>
+            <field ref="account_account_class_59" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_actifs"/>
+        </record>
+
+        <!--End of Class 5-->
+
+        <!--Start of Class 6-->
+        <record id="account_account_class_60" model="account.account.template">
+            <field name="code">600000</field>
+            <field name="name">Achats de marchandises vendues</field>
+            <field ref="account_account_class_06" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_601" model="account.account.template">
+            <field name="code">601000</field>
+            <field name="name">Matières premières</field>
+            <field ref="account_account_class_60" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_602" model="account.account.template">
+            <field name="code">602000</field>
+            <field name="name">Autres approvisionnements</field>
+            <field ref="account_account_class_60" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_603" model="account.account.template">
+            <field name="code">603000</field>
+            <field name="name">Variations des stocks</field>
+            <field ref="account_account_class_60" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_604" model="account.account.template">
+            <field name="code">604000</field>
+            <field name="name">Achats d'études et de prestations de services</field>
+            <field ref="account_account_class_60" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_605" model="account.account.template">
+            <field name="code">605000</field>
+            <field name="name">Achats de matériels; équipements et travaux</field>
+            <field ref="account_account_class_60" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+
+        <record id="account_account_class_607" model="account.account.template">
+            <field name="code">607000</field>
+            <field name="name">Achats non stockés de matières et fournitures</field>
+            <field ref="account_account_class_60" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_608" model="account.account.template">
+            <field name="code">608000</field>
+            <field name="name">Frais accessoires d'achat</field>
+            <field ref="account_account_class_60" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_609" model="account.account.template">
+            <field name="code">609000</field>
+            <field name="name">Rabais; remises; ristournes obtenus sur achats</field>
+            <field ref="account_account_class_60" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+
+        <record id="account_account_class_61" model="account.account.template">
+            <field name="code">610000</field>
+            <field name="name">Services extérieurs</field>
+            <field ref="account_account_class_06" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_611" model="account.account.template">
+            <field name="code">611000</field>
+            <field name="name">Sous-traitance générale</field>
+            <field ref="account_account_class_61" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_613" model="account.account.template">
+            <field name="code">613000</field>
+            <field name="name">Locations</field>
+            <field ref="account_account_class_61" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_614" model="account.account.template">
+            <field name="code">614000</field>
+            <field name="name">Charges locatives et Charges de copropriété</field>
+            <field ref="account_account_class_61" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_615" model="account.account.template">
+            <field name="code">615000</field>
+            <field name="name">Entretien; réparations et maintenance</field>
+            <field ref="account_account_class_61" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_616" model="account.account.template">
+            <field name="code">616000</field>
+            <field name="name">Primes d'assurances</field>
+            <field ref="account_account_class_61" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_617" model="account.account.template">
+            <field name="code">617000</field>
+            <field name="name">Etudes et recherches</field>
+            <field ref="account_account_class_61" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_618" model="account.account.template">
+            <field name="code">618000</field>
+            <field name="name">Documentation et divers</field>
+            <field ref="account_account_class_61" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_619" model="account.account.template">
+            <field name="code">619000</field>
+            <field name="name">Rabais; remises; ristournes obtenus sur services extérieurs</field>
+            <field ref="account_account_class_61" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+
+        <record id="account_account_class_62" model="account.account.template">
+            <field name="code">620000</field>
+            <field name="name">Autres services extérieurs</field>
+            <field ref="account_account_class_06" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+
+        <record id="account_account_class_621" model="account.account.template">
+            <field name="code">621000</field>
+            <field name="name">Personnel extérieur à l'entreprise</field>
+            <field ref="account_account_class_62" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_622" model="account.account.template">
+            <field name="code">622000</field>
+            <field name="name">Rémunérations d'intermédiaires et honoraires</field>
+            <field ref="account_account_class_62" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_623" model="account.account.template">
+            <field name="code">623000</field>
+            <field name="name">Publicité; publication; relations publiques</field>
+            <field ref="account_account_class_62" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_624" model="account.account.template">
+            <field name="code">624000</field>
+            <field name="name">Transports de biens et transport collectif du personnel</field>
+            <field ref="account_account_class_62" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_625" model="account.account.template">
+            <field name="code">625000</field>
+            <field name="name">Déplacements; missions et réceptions</field>
+            <field ref="account_account_class_62" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_626" model="account.account.template">
+            <field name="code">626000</field>
+            <field name="name">Frais postaux et de télécommunications</field>
+            <field ref="account_account_class_62" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_627" model="account.account.template">
+            <field name="code">627000</field>
+            <field name="name">Services bancaires et assimilés</field>
+            <field ref="account_account_class_62" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_628" model="account.account.template">
+            <field name="code">628000</field>
+            <field name="name">Cotisations et divers</field>
+            <field ref="account_account_class_62" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_629" model="account.account.template">
+            <field name="code">629000</field>
+            <field name="name">Rabais; remises; ristournes obtenus sur autres services extérieurs</field>
+            <field ref="account_account_class_62" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+
+        <record id="account_account_class_63" model="account.account.template">
+            <field name="code">630000</field>
+            <field name="name">Charges de personnel</field>
+            <field ref="account_account_class_06" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+
+
+        <record id="account_account_class_631" model="account.account.template">
+            <field name="code">631000</field>
+            <field name="name">Rémunération du personnel</field>
+            <field ref="account_account_class_63" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_634" model="account.account.template">
+            <field name="code">634000</field>
+            <field name="name">Rémunération de l'exploitant individuel</field>
+            <field ref="account_account_class_63" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_635" model="account.account.template">
+            <field name="code">635000</field>
+            <field name="name">Cotisations aux organismes sociaux</field>
+            <field ref="account_account_class_63" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_636" model="account.account.template">
+            <field name="code">636000</field>
+            <field name="name">Charges sociales de l'exploitant individuel</field>
+            <field ref="account_account_class_63" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_637" model="account.account.template">
+            <field name="code">637000</field>
+            <field name="name">Autres Charges sociales</field>
+            <field ref="account_account_class_63" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_638" model="account.account.template">
+            <field name="code">638000</field>
+            <field name="name">Autres Charges de personnel</field>
+            <field ref="account_account_class_63" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+
+        <record id="account_account_class_64" model="account.account.template">
+            <field name="code">640000</field>
+            <field name="name">Impôts; taxes et versements assimilés</field>
+            <field ref="account_account_class_06" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_641" model="account.account.template">
+            <field name="code">641000</field>
+            <field name="name">Impôts; taxes et versements assimilés sur rémunérations</field>
+            <field ref="account_account_class_64" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_642" model="account.account.template">
+            <field name="code">642000</field>
+            <field name="name">Impôts et taxes non récupérables sur chiffre d'affaires</field>
+            <field ref="account_account_class_64" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_645" model="account.account.template">
+            <field name="code">645000</field>
+            <field name="name">Autres impôts et taxes (hors impôts sur les résultats)</field>
+            <field ref="account_account_class_64" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_65" model="account.account.template">
+            <field name="code">650000</field>
+            <field name="name">Autres Charges opérationnelles</field>
+            <field ref="account_account_class_06" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_651" model="account.account.template">
+            <field name="code">651000</field>
+            <field name="name">Redevances pour concessions; brevets; licences; logiciels; droits et valeurs similaires</field>
+            <field ref="account_account_class_65" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_652" model="account.account.template">
+            <field name="code">652000</field>
+            <field name="name">Moins values sur sortie d'd'actifs immobilisès non financiers</field>
+            <field ref="account_account_class_65" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_653" model="account.account.template">
+            <field name="code">653000</field>
+            <field name="name">Jetons de présence</field>
+            <field ref="account_account_class_65" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_654" model="account.account.template">
+            <field name="code">654000</field>
+            <field name="name">Pertes sur créances  irrécouvrables</field>
+            <field ref="account_account_class_65" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_655" model="account.account.template">
+            <field name="code">655000</field>
+            <field name="name">Quote-part de résultat sur opérations faites en commun</field>
+            <field ref="account_account_class_65" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_656" model="account.account.template">
+            <field name="code">656000</field>
+            <field name="name">Amendes et pénalités; subventions accordés; dons et libéralités</field>
+            <field ref="account_account_class_65" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_657" model="account.account.template">
+            <field name="code">657000</field>
+            <field name="name">Charges exceptionnelles de gestion courante</field>
+            <field ref="account_account_class_65" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_658" model="account.account.template">
+            <field name="code">658000</field>
+            <field name="name">Autres Charges de gestion courante</field>
+            <field ref="account_account_class_65" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+
+        <record id="account_account_class_66" model="account.account.template">
+            <field name="code">660000</field>
+            <field name="name">Charges financières</field>
+            <field ref="account_account_class_06" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+
+        <record id="account_account_class_661" model="account.account.template">
+            <field name="code">661000</field>
+            <field name="name">Charges d'intérêts</field>
+            <field ref="account_account_class_66" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_664" model="account.account.template">
+            <field name="code">664000</field>
+            <field name="name">Pertes sur créances liées a des participations</field>
+            <field ref="account_account_class_66" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_665" model="account.account.template">
+            <field name="code">665000</field>
+            <field name="name">Ecart d'évaluation sur actifs financiers Moins-values</field>
+            <field ref="account_account_class_66" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_666" model="account.account.template">
+            <field name="code">666000</field>
+            <field name="name">Pertes de change</field>
+            <field ref="account_account_class_66" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_667" model="account.account.template">
+            <field name="code">667000</field>
+            <field name="name">Pertes nettes sur cessions d'actifs financiers</field>
+            <field ref="account_account_class_66" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_668" model="account.account.template">
+            <field name="code">668000</field>
+            <field name="name">Autres Charges financières</field>
+            <field ref="account_account_class_66" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+
+        <record id="account_account_class_67" model="account.account.template">
+            <field name="code">670000</field>
+            <field name="name">Eléments extraordinaires - Charges</field>
+            <field ref="account_account_class_06" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+
+        <record id="account_account_class_68" model="account.account.template">
+            <field name="code">680000</field>
+            <field name="name">Dotations aux amortissements; provisions et pertes de valeur</field>
+            <field ref="account_account_class_06" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_681" model="account.account.template">
+            <field name="code">681000</field>
+            <field name="name">Dotations au amortissements; prov. et pertes de valeur - actifs non courants</field>
+            <field ref="account_account_class_68" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_682" model="account.account.template">
+            <field name="code">682000</field>
+            <field name="name">Dotations aux  amort; prov. et pertes de valeur des biens mis en concession</field>
+            <field ref="account_account_class_68" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_685" model="account.account.template">
+            <field name="code">685000</field>
+            <field name="name">Dotations aux amortissements; provisions et pertes de valeur - actifs courants</field>
+            <field ref="account_account_class_68" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_686" model="account.account.template">
+            <field name="code">686000</field>
+            <field name="name">Dotations aux amortissements; provisions et pertes de valeurs - éléments financiers</field>
+            <field ref="account_account_class_68" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+
+        <record id="account_account_class_69" model="account.account.template">
+            <field name="code">690000</field>
+            <field name="name">Impôts sur les résultats et assimilés</field>
+            <field ref="account_account_class_06" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_692" model="account.account.template">
+            <field name="code">692000</field>
+            <field name="name">Imposition différée actif</field>
+            <field ref="account_account_class_69" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_693" model="account.account.template">
+            <field name="code">693000</field>
+            <field name="name">Imposition différée passif</field>
+            <field ref="account_account_class_69" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_695" model="account.account.template">
+            <field name="code">695000</field>
+            <field name="name">Impôts sur les bénéfices basés sur le résultat des activités ordinaires</field>
+            <field ref="account_account_class_69" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <record id="account_account_class_698" model="account.account.template">
+            <field name="code">698000</field>
+            <field name="name">Autres impôts sur les résultats</field>
+            <field ref="account_account_class_69" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_expenses"/>
+        </record>
+        <!--End of Class 6-->
+
+        <!-- Start Class 7-->
+        <record id="account_account_class_70" model="account.account.template">
+            <field name="code">700000</field>
+            <field name="name">Ventes de marchandises</field>
+            <field ref="account_account_class_07" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_701" model="account.account.template">
+            <field name="code">701000</field>
+            <field name="name">Ventes de produits finis</field>
+            <field ref="account_account_class_70" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_702" model="account.account.template">
+            <field name="code">702000</field>
+            <field name="name">Ventes de produits intermédiaires</field>
+            <field ref="account_account_class_70" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_703" model="account.account.template">
+            <field name="code">703000</field>
+            <field name="name">Ventes de produits résiduels</field>
+            <field ref="account_account_class_70" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_704" model="account.account.template">
+            <field name="code">704000</field>
+            <field name="name">Ventes de travaux</field>
+            <field ref="account_account_class_70" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_705" model="account.account.template">
+            <field name="code">705000</field>
+            <field name="name">Ventes d'études</field>
+            <field ref="account_account_class_70" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_706" model="account.account.template">
+            <field name="code">706000</field>
+            <field name="name">Autres prestations de services</field>
+            <field ref="account_account_class_70" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_708" model="account.account.template">
+            <field name="code">708000</field>
+            <field name="name">produits des activités annexes</field>
+            <field ref="account_account_class_70" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_709" model="account.account.template">
+            <field name="code">709000</field>
+            <field name="name">Rabais; remises et ristournes accordés</field>
+            <field ref="account_account_class_70" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_73" model="account.account.template">
+            <field name="code">730000</field>
+            <field name="name">Production immobilisée</field>
+            <field ref="account_account_class_07" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_731" model="account.account.template">
+            <field name="code">731000</field>
+            <field name="name">Production immobilisée d'actifs incorporels</field>
+            <field ref="account_account_class_73" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_732" model="account.account.template">
+            <field name="code">732000</field>
+            <field name="name">Production immobilisée d'actifs corporels</field>
+            <field ref="account_account_class_73" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_74" model="account.account.template">
+            <field name="code">740000</field>
+            <field name="name">Subvention d'exploitation</field>
+            <field ref="account_account_class_07" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_741" model="account.account.template">
+            <field name="code">741000</field>
+            <field name="name">Subvention d'équilibre</field>
+            <field ref="account_account_class_74" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_748" model="account.account.template">
+            <field name="code">748000</field>
+            <field name="name">Autres subventions d'exploitation</field>
+            <field ref="account_account_class_74" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_75" model="account.account.template">
+            <field name="code">750000</field>
+            <field name="name">Autres produits opérationnels</field>
+            <field ref="account_account_class_07" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_751" model="account.account.template">
+            <field name="code">751000</field>
+            <field name="name">Redevances pour concessions; brevets; licences; logiciels et valeurs similaires</field>
+            <field ref="account_account_class_75" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_752" model="account.account.template">
+            <field name="code">752000</field>
+            <field name="name">Plus values sur sorties d'actifs immobilisés non financiers</field>
+            <field ref="account_account_class_75" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_753" model="account.account.template">
+            <field name="code">753000</field>
+            <field name="name">Jetons de présences et rémunérations d'administrateurs ou de gérant</field>
+            <field ref="account_account_class_75" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_754" model="account.account.template">
+            <field name="code">754000</field>
+            <field name="name">Quotes-parts de subventions d'investissement virées au résultat de l'exercice</field>
+            <field ref="account_account_class_75" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_755" model="account.account.template">
+            <field name="code">755000</field>
+            <field name="name">Quote-part de résultat sur opérations faites en commun</field>
+            <field ref="account_account_class_75" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_756" model="account.account.template">
+            <field name="code">756000</field>
+            <field name="name">Rentrées sur créances amorties</field>
+            <field ref="account_account_class_75" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_757" model="account.account.template">
+            <field name="code">757000</field>
+            <field name="name">Produits exceptionnels sur opérations de gestion</field>
+            <field ref="account_account_class_75" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_758" model="account.account.template">
+            <field name="code">758000</field>
+            <field name="name">Autres produits de gestion courante</field>
+            <field ref="account_account_class_75" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_76" model="account.account.template">
+            <field name="code">760000</field>
+            <field name="name">Produits financiers</field>
+            <field ref="account_account_class_07" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_761" model="account.account.template">
+            <field name="code">761000</field>
+            <field name="name">Produits des participations</field>
+            <field ref="account_account_class_76" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_762" model="account.account.template">
+            <field name="code">762000</field>
+            <field name="name">Revenus des actifs financiers</field>
+            <field ref="account_account_class_76" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_765" model="account.account.template">
+            <field name="code">765000</field>
+            <field name="name">Ecart d'évaluation sur account.data_account_type_asset financiers - plus -values</field>
+            <field ref="account_account_class_76" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_766" model="account.account.template">
+            <field name="code">766000</field>
+            <field name="name">Gains de change</field>
+            <field ref="account_account_class_76" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_767" model="account.account.template">
+            <field name="code">767000</field>
+            <field name="name">Profits nets sur cessions d'actifs financiers</field>
+            <field ref="account_account_class_76" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_768" model="account.account.template">
+            <field name="code">768000</field>
+            <field name="name">Autres produits financiers</field>
+            <field ref="account_account_class_76" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_77" model="account.account.template">
+            <field name="code">770000</field>
+            <field name="name">Eléments extraordainaire (à préciser)</field>
+            <field ref="account_account_class_07" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_78" model="account.account.template">
+            <field name="code">780000</field>
+            <field name="name">Reprise sur pertes de valeur et provisions</field>
+            <field ref="account_account_class_07" name="parent_id"/>
+            <field name="type">view</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_781" model="account.account.template">
+            <field name="code">781000</field>
+            <field name="name">Reprises d'exploitation sur pertes de valeur et provisions - actifs non courants</field>
+            <field ref="account_account_class_78" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_785" model="account.account.template">
+            <field name="code">785000</field>
+            <field name="name">Reprises d'exploitation sur pertes de valeur et provisions - actifs courants</field>
+            <field ref="account_account_class_78" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+        <record id="account_account_class_786" model="account.account.template">
+            <field name="code">786000</field>
+            <field name="name">Reprises financixéres  sur pertes de valeur et provisions</field>
+            <field ref="account_account_class_78" name="parent_id"/>
+            <field name="type">other</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account_type_product_income"/>
+        </record>
+
+
+        <!-- End Class 7-->
+
+        <record id="alg_chart_template_standard" model="account.chart.template">
+			<field name="name">Algerian Chart of Accounts - Standard</field>
+			<field name="account_root_id" ref="account_account_class_00" />
+			<field name="bank_account_view_id" ref="account_account_class_53" />
+			<field name="currency_id" ref="base.DZD" />
+		</record>
+
+
+    </data>
+</openerp>

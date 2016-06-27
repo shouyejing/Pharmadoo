@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="0">
+
+    <record model="ir.module.category" id="pharma_module_category">
+        <field name="name">Pharmadoo Users</field>
+        <field name="description">Access Rights for Pharmadoo Users</field>
+        <field name="sequence">20</field>
+    </record>
+    <record id="pharmadoo_qc_manager" model="res.groups">
+        <field name="name">QC Manager</field>
+        <field name="category_id" ref="pharma_module_category"/>
+    </record>
+    <record id="pharmadoo_qc_mb_manager" model="res.groups">
+        <field name="name">QC MB Manager</field>
+        <field name="category_id" ref="pharma_module_category"/>
+    </record>
+    <record id="pharmadoo_quality_assurance" model="res.groups">
+        <field name="name">Quality Assurance</field>
+        <field name="category_id" ref="pharma_module_category"/>
+    </record>
+    <record id="pharmadoo_production_manager" model="res.groups">
+        <field name="name">Production Manager</field>
+        <field name="category_id" ref="pharma_module_category"/>
+    </record>
+    <record id="pharmadoo_line_operation_manager" model="res.groups">
+        <field name="name">Line Operations Manager</field>
+        <field name="category_id" ref="pharma_module_category"/>
+    </record>
+    <record id="pharmadoo_chief_pharmacist" model="res.groups">
+        <field name="name">Chief Pharmacist</field>
+        <field name="category_id" ref="pharma_module_category"/>
+    </record>
+    <record id="pharmadoo_accountant" model="res.groups">
+        <field name="name">Accountant</field>
+        <field name="category_id" ref="pharma_module_category"/>
+    </record>
+    <record id="pharmadoo_no_one" model="res.groups">
+        <field name="name">Hide</field>
+        <field name="category_id" ref="pharma_module_category"/>
+    </record>
+    <record id="pharmadoo_qc_anlyst" model="res.groups">
+        <field name="name">QC Analyst</field>
+        <field name="category_id" ref="pharma_module_category"/>
+    </record>
+</data>
+</openerp>

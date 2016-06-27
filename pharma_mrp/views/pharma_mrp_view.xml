@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <report
+                string="Product Vignette"
+                id="pharma_product_vignette"
+                model="mrp.production"
+                report_type="qweb-pdf"
+                name="pharma_mrp.report_product_vignette"
+                file="pharma_mrp.report_product_vignette"
+        />
+
+        <report
+                string="Production Working Centers"
+                id="pharma_production_working_center"
+                model="mrp.production"
+                report_type="qweb-pdf"
+                name="pharma_mrp.report_production_working_centers"
+                file="pharma_mrp.report_production_working_centers"
+        />
+
+
+        <!-- Inherit Product Form View to Include Production Type -->
+        <record id="pharma_mrp_product_form" model="ir.ui.view">
+            <field name="name">pharma.mrp.product.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Sales']" position="before">
+                    <page string="Manufacturing">
+                        <group>
+                            <field name="production_type"/>
+                            <field name="lot_code_id"/>
+                        </group>
+                        <group string="Vignette Information">
+                            <group>
+                                <field name="active_principal"/>
+                                <field name="product_dose"/>
+                                <field name="de_reference"/>
+                            </group>
+                            <group>
+                                <field name="reference_rate"/>
+                                <field name="public_algerian_price"/>
+                                <field name="shp_rate"/>
+                            </group>
+                        </group>
+                    </page>
+
+                </xpath>
+            </field>
+        </record>
+
+        <record id="pharma_mrp_production_form" model="ir.ui.view">
+            <field name="name">pharma.mrp.production.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_planned']" position="after">
+                    <label for="mrp_lot_id"/>
+                    <div>
+                        <field name="mrp_lot_id" class="oe_inline" readonly="1"/>
+                            <button type="object" name="action_generate_lot"
+                            string="Create" states="draft" class="oe_edit_only oe_link"/>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="qc_lot_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="pharma_mrp_mbo_action" model="ir.actions.act_window">
+            <field name="name">Micro Biology Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrp.production</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph,gantt</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="mrp.view_mrp_production_filter"/>
+            <field name="context">{}</field>
+            <field name="domain">[('name','like','MBO')]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a manufacturing order.
+              </p><p>
+                A manufacturing order, based on a bill of materials, will
+                consume raw materials and produce finished products.
+              </p><p>
+                Manufacturing orders are usually proposed automatically based
+                on customer requirements or automated rules like the minimum
+                stock rule.
+              </p>
+            </field>
+        </record>
+        <menuitem action="pharma_mrp_mbo_action" id="menu_pharma_mrp_mbo_action"
+            parent="mrp.menu_mrp_manufacturing" />
+
+        <record id="pharma_mrp_qco_action" model="ir.actions.act_window">
+            <field name="name">Quality Control Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrp.production</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph,gantt</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="mrp.view_mrp_production_filter"/>
+            <field name="context">{}</field>
+            <field name="domain">[('name','like','QCO')]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a manufacturing order.
+              </p><p>
+                A manufacturing order, based on a bill of materials, will
+                consume raw materials and produce finished products.
+              </p><p>
+                Manufacturing orders are usually proposed automatically based
+                on customer requirements or automated rules like the minimum
+                stock rule.
+              </p>
+            </field>
+        </record>
+        <menuitem action="pharma_mrp_qco_action" id="menu_pharma_mrp_qco_action"
+            parent="mrp.menu_mrp_manufacturing" />
+
+
+        <record id="pharma_mrp_mpo_action" model="ir.actions.act_window">
+            <field name="name">Media Production Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrp.production</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph,gantt</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="mrp.view_mrp_production_filter"/>
+            <field name="context">{}</field>
+            <field name="domain">[('name','like','MPO')]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a manufacturing order.
+              </p><p>
+                A manufacturing order, based on a bill of materials, will
+                consume raw materials and produce finished products.
+              </p><p>
+                Manufacturing orders are usually proposed automatically based
+                on customer requirements or automated rules like the minimum
+                stock rule.
+              </p>
+            </field>
+        </record>
+        <menuitem action="pharma_mrp_mpo_action" id="menu_pharma_mrp_mpo_action"
+            parent="mrp.menu_mrp_manufacturing" />
+
+        <record id="pharma_mrp_mo_action" model="ir.actions.act_window">
+            <field name="name">Finished Product Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrp.production</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph,gantt</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="mrp.view_mrp_production_filter"/>
+            <field name="context">{}</field>
+            <field name="domain">[('name','like','MO')]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a manufacturing order.
+              </p><p>
+                A manufacturing order, based on a bill of materials, will
+                consume raw materials and produce finished products.
+              </p><p>
+                Manufacturing orders are usually proposed automatically based
+                on customer requirements or automated rules like the minimum
+                stock rule.
+              </p>
+            </field>
+        </record>
+        <menuitem action="pharma_mrp_mo_action" id="menu_pharma_mrp_mo_action"
+            parent="mrp.menu_mrp_manufacturing" />
+
+    </data>
+</openerp>

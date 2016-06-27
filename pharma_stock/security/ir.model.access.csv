@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+pharma_qc_stock_planned_operation, pharma.qc.stock.planned.operation, model_stock_picking_planned_operation, pharma_security.pharmadoo_qc_anlyst,1,1,1,1
+pharma_qc_manager_stock_planned_operation, pharma.qc.manager.stock.planned.operation, model_stock_picking_planned_operation, pharma_security.pharmadoo_qc_manager,1,1,1,1
+pharma_qc_mb_stock_planned_operation, pharma.qc.mb.stock.planned.operation, model_stock_picking_planned_operation, pharma_security.pharmadoo_qc_mb_manager,1,1,1,1
+pharma_production_manager_stock_planned_operation, pharma.production.manager.stock.planned.operation, model_stock_picking_planned_operation,pharma_security.pharmadoo_production_manager,1,1,1,1
+pharma_line_manager_stock_planned_operation, pharma.line.manager.stock.planned.operation, model_stock_picking_planned_operation, pharma_security.pharmadoo_line_operation_manager,1,1,1,1

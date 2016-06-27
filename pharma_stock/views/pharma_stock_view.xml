@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report
+            string="Package Doc"
+            id="pharma_package_report"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            name="pharma_stock.report_package"
+            file="pharma_stock.report_package"
+        />
+
+        <report
+            string="Quarantine Tickets"
+            id="pharma_quarantine_ticket_report"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            name="pharma_stock.report_quarantine_ticket"
+            file="pharma_stock.report_quarantine_ticket"
+        />
+
+        <report
+            string="Accepted/Rejected Tickets"
+            id="pharma_lot_ticket_report"
+            model="stock.production.lot"
+            report_type="qweb-pdf"
+            name="pharma_stock.report_lot_ticket"
+            file="pharma_stock.report_lot_ticket"
+        />
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="pharma_exp_retest_date_lot_form" model="ir.ui.view">
+            <field name="name">pharma.exp_retest_date.lot.form</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='ref']" position="after">
+                    <field name="exp_retest_date"/>
+                    <field name="retest_date"/>
+                    <field name="expiry_date"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="pharma_lot_state_tree_view" model="ir.ui.view">
+            <field name="name">pharma.lot.state.tree.view</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='create_date']" position="after">
+                    <field name="state" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="pharma_locked_raw_material_lot_form" model="ir.ui.view">
+            <field name="name">stock.locked.raw.material.lot.form</field>
+            <field name="model">stock.production.lot</field>
+            <field name="arch" type="xml">
+                <form string="Serial Number">
+                    <header>
+                        <button name="action_approve_picking" string="Approve" type="object"
+                            class="oe_highlight" states="quarantine" groups="pharma_security.pharmadoo_qc_manager"/>
+                        <button name="action_validate_picking" string="Unlock Raw Material" type="object" groups="pharma_security.pharmadoo_quality_assurance"
+                            class="oe_highlight" states="approved"/>
+                        <button name="action_reject" string="Rejected" type="object"
+                                class="oe_highlight" states="approved,quarantine"/>
+                        <field name="state" widget="statusbar" statusbar_colors='{"rejected":"red", "approved":"blue"}'/>
+                    </header>
+                    <div class="oe_button_box oe_right">
+                        <button name="action_traceability" icon="fa-arrow-up" class="oe_stat_button" string="Traceability" type="object" attrs="{'invisible': [('quant_ids','=',[])]}"/>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group name="main_group">
+                        <group>
+                            <field name="product_id"/>
+                            <field name="ref"/>
+                            <field name="exp_retest_date"/>
+                            <field name="retest_date"/>
+                            <field name="expiry_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Products">
+                            <field name="quant_ids">
+                                <tree string="Stock Moves">
+                                    <field name="name"/>
+                                    <field name="product_id"/>
+                                    <field name="qty" on_change="onchange_quantity(product_id, product_qty, product_uom, product_uos)"/>
+                                    <field name="location_id" groups="stock.group_locations"/>
+                                </tree>
+                             </field>
+                        </page>
+                        <page string="Approval Information">
+                            <group string="Approval Information">
+                                <field name="approved_by_usr_id" readonly="1"/>
+                                <field name="approved_date" readonly="1"/>
+                            </group>
+                            <group>
+                                <group string="Validation Information">
+                                    <field name="validated_by_usr_id" readonly="1"/>
+                                    <field name="validated_date" readonly="1"/>
+                                </group>
+                                <group string="Rejection Information">
+                                    <field name="rejected_by_user_id" readonly="1"/>
+                                    <field name="rejected_date" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record id="pharma_locked_finished_product_lot_form" model="ir.ui.view">
+            <field name="name">stock.locked.finished.product.lot.form</field>
+            <field name="model">stock.production.lot</field>
+            <field name="arch" type="xml">
+                <form string="Serial Number">
+                    <header>
+                        <button name="action_approve_picking" string="Approve" type="object"
+                            class="oe_highlight" states="quarantine" groups="pharma_security.pharmadoo_qc_manager"/>
+                        <button name="action_validate_picking" string="Unlock Finished Product" type="object" groups="pharma_security.pharmadoo_chief_pharmacist"
+                            class="oe_highlight" states="approved"/>
+
+                        <button name="action_reject" string="Rejected" type="object"
+                                class="oe_highlight" states="approved,quarantine"
+                                groups="pharma_security.pharmadoo_qc_manager, pharma_security.pharmadoo_chief_pharmacist"/>
+                        <field name="state" widget="statusbar" statusbar_colors='{"rejected":"red", "approved":"blue"}'/>
+                    </header>
+                    <div class="oe_button_box oe_right">
+                        <button name="action_traceability" icon="fa-arrow-up" class="oe_stat_button" string="Traceability" type="object" attrs="{'invisible': [('quant_ids','=',[])]}"/>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group name="main_group">
+                        <group>
+                            <field name="product_id"/>
+                            <field name="ref"/>
+                            <field name="exp_retest_date"/>
+                            <field name="retest_date"/>
+                            <field name="expiry_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Products">
+                            <field name="quant_ids">
+                                <tree string="Stock Moves">
+                                    <field name="name"/>
+                                    <field name="product_id"/>
+                                    <field name="qty" on_change="onchange_quantity(product_id, product_qty, product_uom, product_uos)"/>
+                                    <field name="location_id" groups="stock.group_locations"/>
+                                </tree>
+                             </field>
+                        </page>
+                        <page string="Approval Information">
+                            <group string="Approval Information">
+                                <field name="approved_by_usr_id" readonly="1"/>
+                                <field name="approved_date" readonly="1"/>
+                            </group>
+                            <group>
+                                <group string="Validation Information">
+                                    <field name="validated_by_usr_id" readonly="1"/>
+                                    <field name="validated_date" readonly="1"/>
+                                </group>
+                                <group string="Rejection Information">
+                                    <field name="rejected_by_user_id" readonly="1"/>
+                                    <field name="rejected_date" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record id="pharma_locked_raw_material_lot_kanban" model="ir.ui.view">
+            <field name="name">pharma.locked.raw.material.lot.kanban</field>
+            <field name="model">stock.production.lot</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state">
+                    <field name="name"/>
+                    <field name="ref"/>
+                    <field name="name"/>
+                    <field name="product_id"/>
+                    <field name="expiry_date"/>
+                    <field name="retest_date"/>
+                    <field name="state"/>
+                    <field name="approved_by_usr_id"/>
+                    <field name="approved_date"/>
+                    <field name="validated_by_usr_id"/>
+                    <field name="validated_by_usr_id"/>
+                    <field name="color"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_project oe_kanban_global_click">
+                                <div class="oe_dropdown_toggle oe_dropdown_kanban" groups="base.group_user">
+                                    <span class="oe_e">í</span>
+                                    <ul class="oe_dropdown_menu">
+                                        <t t-if="widget.view.is_action_enabled('edit')"><li><a type="edit">Lot Details</a></li></t>
+                                    </ul>
+                                </div>
+                                <div class="oe_kanban_content">
+                                    <h4>Lot ID: <strong><field name="name"/></strong></h4>
+                                    <h4>Supp Ref: <strong><field name="ref"/></strong></h4>
+                                    <h4>Product: <strong><field name="product_id"/></strong></h4>
+                                    <t t-if="record.state.raw_value == 'approved'">
+                                        <h4>Approved by: <field name="approved_by_usr_id"/> </h4>
+                                        <h4>Approved Date: <field name="approved_date"/></h4>
+                                    </t>
+                                    <t t-if="record.state.raw_value == 'accepted'">
+                                        <h4>Approved by: <field name="approved_by_usr_id"/> </h4>
+                                        <h4>Approved Date: <field name="approved_date"/></h4>
+                                        <h4>Validated By: <field name="validated_by_usr_id"/></h4>
+                                        <h4>Validated Date: <field name="validated_date"/></h4>
+                                    </t>
+                                    <t t-if="record.state.raw_value == 'rejected'">
+                                        <h4>Rejected by: <field name="rejected_by_user_id"/> </h4>
+                                        <h4>Rejected Date: <field name="rejected_date"/></h4>
+                                    </t>
+                                </div>
+                                <div class="oe_kanban_content">
+                                    <p>Expiry Date: <field name="expiry_date"/> </p>
+                                    <p>Retest Date: <field name="retest_date"/> </p>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="pharma_action_locked_raw_material_form" model="ir.actions.act_window">
+            <field name="name">Locked Raw Material Lots</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.production.lot</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="view_id" ref="stock.view_production_lot_tree"/>
+            <field name="search_view_id" ref="stock.search_product_lot_filter"/>
+            <field name="context">{}</field>
+            <field name="domain">[('quant_ids.location_id', '=', 21)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a serial number.
+                </p><p>
+                    This is the list of all the production lots you recorded. When
+                    you select a lot, you can get the
+                    traceability of the products contained in lot. By default, the
+                    list is filtered on the serial numbers that are available in
+                    your warehouse but you can uncheck the 'Available' button to
+                    get all the lots you produced, received or delivered to
+                    customers.
+                </p>
+            </field>
+        </record>
+        <menuitem action="pharma_action_locked_raw_material_form" id="menu_pharma_action_locked_raw_material_form"
+                  parent="stock.menu_traceability" groups="stock.group_production_lot"
+                  sequence="1"/>
+
+        <record id="pharma_action_locked_finished_product_form" model="ir.actions.act_window">
+            <field name="name">Locked Finished Product Lots</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.production.lot</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="view_id" ref="stock.view_production_lot_tree"/>
+            <field name="search_view_id" ref="stock.search_product_lot_filter"/>
+            <field name="context">{}</field>
+            <field name="domain">[('quant_ids.location_id', '=', 31)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a serial number.
+                </p>
+                <p>
+                    This is the list of all the production lots you recorded. When
+                    you select a lot, you can get the
+                    traceability of the products contained in lot. By default, the
+                    list is filtered on the serial numbers that are available in
+                    your warehouse but you can uncheck the 'Available' button to
+                    get all the lots you produced, received or delivered to
+                    customers.
+                </p>
+            </field>
+        </record>
+        <menuitem action="pharma_action_locked_finished_product_form" id="menu_pharma_action_locked_finished_product_form"
+                parent="stock.menu_traceability" groups="stock.group_production_lot"
+                sequence="1"/>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="pharma_stock_quant_package_form" model="ir.ui.view">
+            <field name="name">pharma.stock.quant.package.form</field>
+            <field name="model">stock.quant.package</field>
+            <field name="inherit_id" ref="stock.view_quant_package_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='owner_id']" position="after">
+                    <field name="lock_number"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

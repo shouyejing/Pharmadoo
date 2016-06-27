@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="stock_picking_quant_tree_view" model="ir.ui.view">
+            <field name="name">stock.picking.quant.tree.view</field>
+            <field name="model">stock.picking.quant</field>
+            <field name="arch" type="xml">
+                <tree string="Stock Picking Quants">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="picking_type_id"/>
+                    <field name="date_done"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="stock_picking_quant_form_view" model="ir.ui.view">
+            <field name="name">stock.picking.quant.form.view</field>
+            <field name="model">stock.picking.quant</field>
+            <field name="arch" type="xml">
+                <form string="Stock Picking Quant">
+                    <header>
+                        <button name="action_confirm_picking"
+                                string="Confirm Picking"
+                                type="object"
+                                class="oe_highlight"
+                                states="draft"/>
+                        <button name="action_done_picking"
+                                string="Transfer Packs"
+                                type="object"
+                                class="oe_highlight"
+                                states="confirmed"/>
+                        <button name="action_cancel_picking"
+                                string="Cancel Transfer"
+                                type="object"
+                                states="draft,confirmed"/>
+
+                         <button name="print_transfer_documents"
+                                string="Print Transfer Documents"
+                                type="object"
+                                states="done"/>
+
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                             <group>
+                                 <field name="name"/>
+                                 <field name="picking_type_id" domain="[('use_picking_quant', '=', True)]"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="date_done"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="location_src_id" readonly="1"/>
+                            <field name="location_dest_id" readonly="1"/>
+                        </group>
+
+                        <notebook>
+                            <page string="Packages">
+                                <field name="quant_ids"
+                                       nolabel="1"
+                                       context="{'search_default_location_id': location_src_id,
+                                                 'tree_view_ref': 'pharma_stock.stock_quant_is_open_tree_view'}">
+                                    <tree>
+                                        <field name="product_id"/>
+                                        <field name="lot_id" />
+                                        <field name="package_id" />
+                                        <field name="qty"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Move Lines">
+                                <field name="move_ids" readonly="1" nolabel="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="stock_quant_is_open_tree_view" model="ir.ui.view">
+            <field name="name">stock.quant.is.open.tree.view</field>
+            <field name="model">stock.quant</field>
+            <field name="arch" type="xml">
+                <tree string="Quants">
+                    <field name="lot_id"/>
+                    <field name="product_id"/>
+                    <field name="package_id"/>
+                    <field name="qty" />
+                    <field name="location_id"/>
+                    <field name="in_date"/>
+                    <field name="is_open"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="stock_picking_quant_search" model="ir.ui.view">
+            <field name="name">stock.picking.quant.search</field>
+            <field name="model">stock.picking.quant</field>
+            <field name="arch" type="xml">
+                <search string="Picking Quants Lists">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="stock_picking_quant_action" model="ir.actions.act_window">
+            <field name="name">stock.picking.quant.action</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.picking.quant</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain"></field>
+            <field name="context">{
+                    'search_default_picking_type_id': [active_id],
+                    'default_picking_type_id': active_id,
+            }
+            </field>
+            <field name="search_view_id" ref="stock_picking_quant_search"/>
+        </record>
+
+        <record id="stock_picking_quant_draft_action" model="ir.actions.act_window">
+            <field name="name">stock.picking.quant.action</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.picking.quant</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'draft')]</field>
+            <field name="context">{
+                    'search_default_picking_type_id': [active_id],
+                    'default_picking_type_id': active_id,
+            }
+            </field>
+            <field name="search_view_id" ref="stock_picking_quant_search"/>
+        </record>
+
+        <record id="stock_picking_quant_confirmed_action" model="ir.actions.act_window">
+            <field name="name">stock.picking.quant.action</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.picking.quant</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'confirmed')]</field>
+            <field name="context">{
+                    'search_default_picking_type_id': [active_id],
+                    'default_picking_type_id': active_id,
+            }
+            </field>
+            <field name="search_view_id" ref="stock_picking_quant_search"/>
+        </record>
+
+        <record id="stock_picking_quant_done_action" model="ir.actions.act_window">
+            <field name="name">stock.picking.quant.action</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.picking.quant</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'done')]</field>
+            <field name="context">{
+                    'search_default_picking_type_id': [active_id],
+                    'default_picking_type_id': active_id,
+            }
+            </field>
+            <field name="search_view_id" ref="stock_picking_quant_search"/>
+        </record>
+
+        <record id="stock_picking_type_quant_kanban" model="ir.ui.view">
+            <field name="name">stock.picking.type.quant.kanban</field>
+            <field name="model">stock.picking.type</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey" create="0">
+                    <field name="complete_name"/>
+                    <field name="color"/>
+                    <field name="count_picking_quant_draft"/>
+                    <field name="count_picking_quant_confirmed"/>
+                    <field name="count_picking_quant_done"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_stock_picking_type">
+                                <div class="oe_dropdown_toggle oe_dropdown_kanban" groups="stock.group_stock_manager">
+                                    <span class="oe_e">í</span>
+                                    <ul class="oe_dropdown_menu">
+                                        <t t-if="widget.view.is_action_enabled('edit')"><li><a type="edit">Edit...</a></li></t>
+                                        <t t-if="widget.view.is_action_enabled('delete')"><li><a type="delete">Delete</a></li></t>
+                                        <t t-if="widget.view.is_action_enabled('edit')"><li><ul class="oe_kanban_colorpicker" data-field="color"/></li></t>
+                                    </ul>
+                                </div>
+                                <div class="oe_kanban_content">
+                                    <h4 class="text-center"><strong><field name="complete_name"/></strong></h4>
+
+                                    <div class="oe_items_list oe_kanban_ellipsis">
+                                        <div>
+                                            <a name="%(stock_picking_quant_draft_action)d" type="action">
+                                                <field name="count_picking_quant_draft"/> Draft Picking Quants
+                                            </a>
+                                        </div>
+                                        <div t-if="record.count_picking_quant_confirmed.raw_value &gt; 0">
+                                            <a name="%(stock_picking_quant_confirmed_action)d" type="action">
+                                                <field name="count_picking_quant_confirmed"/> Confirmed Picking Quants
+                                            </a>
+                                        </div>
+                                        <div t-if="record.count_picking_quant_done.raw_value &gt; 0">
+                                            <a name="%(stock_picking_quant_done_action)d" type="action">
+                                                <field name="count_picking_quant_done"/> Done Picking Quants
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a name="%(stock_picking_quant_action)d" type="action">All Picking Quants</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="stock_picking_type_quant_form" model="ir.ui.view">
+            <field name="name">stock.picking.type.quant.form</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.view_picking_type_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='return_picking_type_id']" position="after">
+                    <field name="use_picking_quant"/>
+                </xpath>
+
+                <xpath expr="//field[@name='warehouse_id']" position="after">
+                    <field name="picking_quant_sequence"
+                           attrs="{'invisible': [('use_picking_quant', '=', False)],
+                                   'required': [('use_picking_quant', '=', True)]}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="stock_picking_type_quant_action" model="ir.actions.act_window">
+            <field name="name">Qaunt Operations</field>
+            <field name="res_model">stock.picking.type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="domain">[('use_picking_quant', '=', True)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new picking type.
+                </p><p>
+                    The picking type system allows you to assign each stock
+                    operation a specific type which will alter its views accordingly.
+                    On the picking type you could e.g. specify if packing is needed by default,
+                    if it should show the customer.
+                </p>
+            </field>
+        </record>
+
+        <record id="stock_picking_quant_type_kanban_action" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="stock_picking_type_quant_kanban"/>
+            <field name="act_window_id" ref="stock_picking_type_quant_action"/>
+        </record>
+
+      <!--<record id="stock_picking_quant_type_form_action" model="ir.actions.act_window.view">-->
+          <!--<field eval="2" name="sequence"/>-->
+          <!--<field name="view_mode">form</field>-->
+          <!--<field name="view_id" ref="justice_civil_case_form_view"/>-->
+          <!--<field name="act_window_id" ref="justice_ci_civil_case_action"/>-->
+      <!--</record>-->
+
+        <menuitem
+            action="stock_picking_type_quant_action"
+            id="menu_picking_type_quant"
+            parent="stock.menu_stock_warehouse_mgmt" sequence="2"/>
+
+    </data>
+</openerp>

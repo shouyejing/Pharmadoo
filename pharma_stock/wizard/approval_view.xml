@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="pharma_stock_approval_form_view" model="ir.ui.view">
+            <field name="name">pharma.stock.approval.form</field>
+            <field name="model">pharma.stock.approval</field>
+            <field name="arch" type="xml">
+                <form string="Enter your password">
+                    <sheet>
+                        <h2 class="text-center">
+                            Electronic Batch Release
+                        </h2>
+                        <p style="color:red;">
+                            You are going to release this batch.
+                        </p>
+                        <p style="color:red;">
+                            This action is <b>under your RESPONSIBILITY</b>. You Should Check if the <b>entire tests</b> have been passed as per the specifications.
+                        </p>
+                        <p style="color:red;">
+                            In case of any doubt please stop this action and confirm all the data.
+                        </p>
+                        <group>
+                            <field name="user"/>
+                            <field name="user_name" invisible="1"/>
+                            <field name="password" class="oe_inline" password="True"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="do_approve_movement" string="Approve" type="object" class="oe_highlight"/>
+                        or
+                        <button string="_Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

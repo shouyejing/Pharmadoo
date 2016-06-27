@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="pharma_codification_product_code_form" model="ir.ui.view">
+            <field name="name">pharma.codification.product.code.form</field>
+            <field name="model">pharma.codification.product</field>
+            <field name="arch" type="xml">
+                <form string="Product Internal Reference Generator">
+                    <sheet>
+                        <group string="Finished Product Codification" widget="selection">
+                            <field name="product_family" widget="selection"/>
+                            <field name="product_dosage" widget="selection"/>
+                            <field name="product_condit"/>
+                        </group>
+                        <group string="Raw Material Product Codification">
+                            <field name="product_material" widget="selection"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button type="object" name="generate_product_code" string="Generate" class="oe_highlight"/>
+                        or
+                        <button string="_Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

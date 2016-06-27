@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <!--Warehouses-->
+        <record id="raw_material_warehouse" model="stock.warehouse">
+            <field name="name">Raw Materials Warehouse</field>
+            <field name="partner_id" ref="base.main_partner"/>
+            <field name="code">RMW01</field>
+        </record>
+
+
+        <record id="flam_proof_warehouse" model="stock.warehouse">
+            <field name="name">Flam Proof Warehouse</field>
+            <field name="partner_id" ref="base.main_partner"/>
+            <field name="code">FLW01</field>
+        </record>
+
+        <record id="pahrma_wharehouse_weighting" model='stock.location.route'>
+            <field name="name">Weighting</field>
+            <field name="sequence">5</field>
+        </record>
+
+    </data>
+</openerp>

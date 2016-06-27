@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="pharma_codification_dosage_tree" model="ir.ui.view">
+            <field name="name">pharma.codification.dosage.tree</field>
+            <field name="model">pharma.codification.dosage</field>
+            <field name="arch" type="xml">
+                <tree string="Dosage Form" editable="bottom">
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="pharma_codification_dosage_action" model="ir.actions.act_window">
+            <field name="name">Product Forms</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pharma.codification.dosage</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+
+              </p><p>
+
+              </p>
+            </field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="menu_pharma_codification_dosage_action" parent="stock.menu_product_in_config_stock" action="pharma_codification_dosage_action"/>
+
+        <record id="pharma_codification_family_tree" model="ir.ui.view">
+            <field name="name">pharma.codification.family.tree</field>
+            <field name="model">pharma.codification.family</field>
+            <field name="arch" type="xml">
+                <tree string="Product Family" editable="bottom">
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="pharma_codification_family_action" model="ir.actions.act_window">
+            <field name="name">Therapeutic Classes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pharma.codification.family</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+
+              </p><p>
+
+              </p>
+            </field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="menu_pharma_codification_family_action" parent="stock.menu_product_in_config_stock" action="pharma_codification_family_action"/>
+
+
+
+
+
+        <record id="pharma_codification_conditioning_tree" model="ir.ui.view">
+            <field name="name">pharma.codification.conditioning.tree</field>
+            <field name="model">pharma.codification.conditioning</field>
+            <field name="arch" type="xml">
+                <tree string="Product Family" editable="bottom">
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="pharma_codification_conditioning_action" model="ir.actions.act_window">
+            <field name="name">Conditioning</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pharma.codification.conditioning</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+
+              </p><p>
+
+              </p>
+            </field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="menu_pharma_codification_conditioning_action" parent="stock.menu_product_in_config_stock" action="pharma_codification_conditioning_action"/>
+
+
+
+
+
+
+
+
+        <!--   -->
+        <record id="pharma_codification_productcode_tree" model="ir.ui.view">
+            <field name="name">pharma.codification.productcode.tree</field>
+            <field name="model">pharma.codification.product.code</field>
+            <field name="arch" type="xml">
+                <tree string="Finished Product Codes" editable="bottom">
+                    <field name="dosage_id"/>
+                    <field name="family_id"/>
+                    <field name="seq"/>
+                    <field name="padding"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="pharma_codification_productcode_action" model="ir.actions.act_window">
+            <field name="name">Finished Product Codes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pharma.codification.product.code</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+
+              </p><p>
+
+              </p>
+            </field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="menu_pharma_codification_productcode_action" parent="stock.menu_product_in_config_stock" action="pharma_codification_productcode_action"/>
+
+
+
+
+        <record id="pharma_codification_materialcode_tree" model="ir.ui.view">
+            <field name="name">pharma.codification.materialcode.tree</field>
+            <field name="model">pharma.codification.materiel.code</field>
+            <field name="arch" type="xml">
+                <tree string="Raw Material Codification" editable="bottom">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="increment"/>
+                    <field name="seq"/>
+                    <field name="padding"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="pharma_codification_materialcode_action" model="ir.actions.act_window">
+            <field name="name">Raw Material Codes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pharma.codification.materiel.code</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+
+              </p><p>
+
+              </p>
+            </field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="menu_pharma_codification_materialcode_action" parent="stock.menu_product_in_config_stock" action="pharma_codification_materialcode_action"/>
+
+        <record id="pharma_codification_lot_tree" model="ir.ui.view">
+            <field name="name">pharma.codification.lot.tree</field>
+            <field name="model">pharma.codification.lot</field>
+            <field name="arch" type="xml">
+                <tree string="Product Lot Codification" editable="bottom">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="increment"/>
+                    <field name="seq"/>
+                    <field name="padding"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="pharma_codification_lot_action" model="ir.actions.act_window">
+            <field name="name">Lot Codification</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pharma.codification.lot</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+
+              </p><p>
+
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_pharma_codification_lot_action" parent="stock.menu_traceability" action="pharma_codification_lot_action"/>
+
+    </data>
+</openerp>

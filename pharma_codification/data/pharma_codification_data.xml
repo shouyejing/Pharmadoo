@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--<record id="sequence_pharma_mrp_production_type_lot" model="ir.sequence.type">-->
+            <!--<field name="name">Pharmadoo Production Lot Number</field>-->
+            <!--<field name="code">pharma.codification.production.lot</field>-->
+        <!--</record>-->
+
+        <!--<record id="sequence_pharma_mrp_production_lot" model="ir.sequence">-->
+            <!--<field name="name">Pharmadoo Production Lot Number</field>-->
+            <!--<field name="code">pharma.codification.production.lot</field>-->
+            <!--<field name="padding">3</field>-->
+            <!--<field name="number_next">1</field>-->
+            <!--<field name="number_increment">1</field>-->
+        <!--</record>-->
+
+        <record id="sequence_pharma_material_type_pa_lot" model="ir.sequence.type">
+            <field name="name">Pharmadoo Raw Material PA Lot Number</field>
+            <field name="code">pharma.codification.material.pa.lot</field>
+        </record>
+
+        <record id="sequence_pharma_material_pa_lot" model="ir.sequence">
+            <field name="name">Pharmadoo Raw Material PA Lot Number</field>
+            <field name="code">pharma.codification.material.pa.lot</field>
+            <field name="padding">3</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_pharma_material_type_ex_lot" model="ir.sequence.type">
+            <field name="name">Pharmadoo Raw Material EX Lot Number</field>
+            <field name="code">pharma.codification.material.lot</field>
+        </record>
+
+        <record id="sequence_pharma_material_ex_lot" model="ir.sequence">
+            <field name="name">Pharmadoo Raw Material EX Lot Number</field>
+            <field name="code">pharma.codification.material.ex.lot</field>
+            <field name="padding">3</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_pharma_material_type_ac_lot" model="ir.sequence.type">
+            <field name="name">Pharmadoo Raw Material AC Lot Number</field>
+            <field name="code">pharma.codification.material.ac.lot</field>
+        </record>
+
+        <record id="sequence_pharma_material_ac_lot" model="ir.sequence">
+            <field name="name">Pharmadoo Raw Material Lot Number</field>
+            <field name="code">pharma.codification.material.ac.lot</field>
+            <field name="padding">3</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+
+
+        <!--<record id="sequence_pharma_product_code_type" model="ir.sequence.type">-->
+            <!--<field name="name">Pharmadoo Product Code</field>-->
+            <!--<field name="code">pharma.codification.product.code</field>-->
+        <!--</record>-->
+
+        <!--<record id="sequence_pharma_product_code" model="ir.sequence">-->
+            <!--<field name="name">Pharmadoo Product Code</field>-->
+            <!--<field name="code">pharma.codification.product.code</field>-->
+            <!--<field name="padding">3</field>-->
+            <!--<field name="number_next">1</field>-->
+            <!--<field name="number_increment">1</field>-->
+        <!--</record>-->
+
+        <!--<record id="sequence_pharma_material_code_type" model="ir.sequence.type">-->
+            <!--<field name="name">Pharmadoo Material Code</field>-->
+            <!--<field name="code">pharma.codification.material.code</field>-->
+        <!--</record>-->
+
+        <!--<record id="sequence_pharma_product_code" model="ir.sequence">-->
+            <!--<field name="name">Pharmadoo Material Code</field>-->
+            <!--<field name="code">pharma.codification.material.code</field>-->
+            <!--<field name="padding">3</field>-->
+            <!--<field name="number_next">1</field>-->
+            <!--<field name="number_increment">1</field>-->
+        <!--</record>-->
+
+    </data>
+</openerp>
